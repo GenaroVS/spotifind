@@ -11,24 +11,24 @@ const getToken = () => {
     }
   })
     .then(response => {
-      console.log('Expires: ', response.data.expires_in);
-      console.log('Status ', response.status);
+      console.log('Auth Status ', response.status);
       return response.data.access_token;
     })
     .catch(err => console.log(err));
 };
 
 const getSpotData = (token, url, data) => {
-  axios.get(url, data, {
+  return axios.get(url, {
+    params: data,
     headers: {
       'Authorization': 'Bearer ' + token
     }
   })
     .then(response => {
-      console.log('Status ', response.status);
+      console.log('Query Status ', response.status);
       return response.data;
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err.config));
 };
 
 module.exports = {

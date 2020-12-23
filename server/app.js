@@ -12,9 +12,12 @@ if (process.env.NODE_ENV === 'production') {
 app.get('/newArtist', (req, res) => {
   spot.getToken()
     .then(token => {
-      res.send(token).end();
+      return spot.getSpotData(token, 'https://api.spotify.com/v1/tracks/2TpxZ7JUBn3uw46aR7qd6V')
     })
-    .catch(err => console.log(err));
+    .then(response => {
+      res.send(response).end();
+    })
+    .catch(err => console.log(err.config));
 });
 
 
