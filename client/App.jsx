@@ -1,20 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect , useState} from 'react';
+import axios from 'axios';
+
+import NavBar from './components/NavBar.jsx';
+import Artist from './components/Artist.jsx';
 
 export default () => {
+  const [artist, setArtist] = useState({});
+  const [track, setTrack] = useState({});
+
   useEffect(() => {
     (async () => {
-      const data = await fetch('/api/hello')
-        .then(res => res.text())
-        .then(text => text)
+      const data = await axios.get('/api/newArtist')
+        .then(res => {
+          setArtist(res.data.resArtist);
+          setTrack(res.data.resTrack);
+        })
         .catch(err => console.log(err));
-
-      console.log(data)
     })()
   }, [])
 
   return (
-    <div>
-      hello aha :D
-    </div>
+    <>
+      <NavBar />
+      <Artist />
+    </>
   )
 }
