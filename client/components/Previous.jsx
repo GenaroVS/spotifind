@@ -5,10 +5,6 @@ export default () => {
 
 
   return (
-    <nav>
-      <div> Previous Days </div>
-      <div> Today's Song </div>
-      <div> Leaderboard </div>
-    </nav>
+    <p> Previous </p>
   )
 };
