@@ -8,15 +8,13 @@ import Previous from './components/Previous.jsx';
 
 export default () => {
   const [artist, setArtist] = useState({});
-  const [track, setTrack] = useState({});
   const [page, setPage] = useState('');
 
   useEffect(() => {
     (async () => {
       const data = await axios.get('/api/newArtist')
-        .then(res => {
-          setArtist(res.data.resArtist);
-          setTrack(res.data.resTrack);
+        .then(artist => {
+          setArtist(artist.data);
         })
         .catch(err => console.log(err));
     })()
@@ -29,7 +27,7 @@ export default () => {
         <div onClick={e => setPage(e.target.id)} id='today'> Today's Song </div>
         <div onClick={e => setPage(e.target.id)} id='leaderboard'> Leaderboard </div>
       </nav>
-      {page === 'today' && <Artist artist={artist} track={track} />}
+      {page === 'today' && <Artist artist={artist} />}
       {page === 'leaderboard' && <Leaderboard />}
       {page === 'previous' && <Previous />}
     </>

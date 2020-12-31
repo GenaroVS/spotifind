@@ -6,24 +6,24 @@ const Page = styled.div`
 `;
 
 
-export default ({artist, track}) => {
+export default ({artist}) => {
 
   //Artist: external_urls.spotify, followers, genres, images[0], name
   //Track: album.images[0], external_urls.spotify, duration, preview_url, name
   console.log(artist);
-  console.log(track);
   return (
     <section>
       <p>{artist.name}</p>
-      <p>{artist.followers.total}</p>
-      <img src={artist.images[0].url} alt='Artist Photo' />
-      <a href={artist.external_urls.spotify} target='_blank'> Artist Page </a>
+      <p>{artist.followers}</p>
+      <img src={artist.artist_photo} alt='Artist Photo' />
+      <a href={artist.artist_page} target='_blank'> Artist Page </a>
 
-      <p>{track.name}</p>
-      <p>{track.duration_ms}</p>
-      <img src={track.album.images[0].url} alt='Track Album Photo' />
-      <a href={track.preview_url} target='_blank'> Preview </a>
-      <a href={track.external_urls.spotify} target='_blank'> Track </a>
+      <p>{artist.track}</p>
+      <p>{artist.duration}</p>
+      <img src={artist.album_photo} alt='Track Album Photo' />
+      <a href={artist.preview} target='_blank'> Preview </a>
+      <a href={artist.track_page} target='_blank'> Track </a>
+      <p>{artist.likes}</p>
     </section>
   )
 };
