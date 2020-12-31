@@ -22,8 +22,8 @@ const insertArtist = (artist) => {
     .catch(err => console.log(err));
 };
 
-const updateLikes = (pageUrl) => {
-  return pool.query(Query.incrLikes, [pageUrl])
+const updateLikes = (id) => {
+  return pool.query(Query.incrLikes, [id])
     .then(res => res)
     .catch(err => console.log(err));
 };

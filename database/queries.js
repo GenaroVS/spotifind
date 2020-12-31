@@ -18,7 +18,7 @@ VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
 
 const getArtists = 'SELECT * FROM artists WHERE date + make_interval(days => $1) >= (SELECT LOCALTIMESTAMP);';
 
-const incrLikes = 'UPDATE artists SET likes = likes + 1 WHERE artist_page = $1;';
+const incrLikes = 'UPDATE artists SET likes = likes + 1 WHERE id = $1;';
 
 module.exports = {
   artistTable,
