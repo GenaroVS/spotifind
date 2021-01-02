@@ -28,8 +28,19 @@ const updateLikes = (id) => {
     .catch(err => console.log(err));
 };
 
+const selectLB = () => {
+  return pool.query(Query.getLeaderBoard)
+    .then(res => {
+      return res.rows.sort((a, b) => {
+        return b.likes - a.likes;
+      });
+    })
+    .catch(err => console.log(err));
+}
+
 module.exports = {
   selectArtist,
   insertArtist,
   updateLikes,
+  selectLB
 }

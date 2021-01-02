@@ -1,10 +1,14 @@
 import React, { useEffect , useState} from 'react';
-import styled from 'styled-components';
+import Artist from './Artist.jsx';
 
-export default () => {
+export default ({ previous, page }) => {
 
 
   return (
-    <p> Previous </p>
+    <>
+      {previous.map(artist => {
+        return <Artist artist={artist} page={page}/>
+      })}
+    </>
   )
 };

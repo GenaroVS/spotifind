@@ -1,35 +1,47 @@
-import React, { useEffect , useState} from 'react';
+import React, { useEffect , useState } from 'react';
 import axios from 'axios';
 
-//import NavBar from './components/NavBar.jsx';
 import Artist from './components/Artist.jsx';
 import Leaderboard from './components/LeaderBoard.jsx';
 import Previous from './components/Previous.jsx';
+import { Logo, Container, NavBar, NavBtn, MainBtn } from './styles/AppStyles.js';
 
 export default () => {
   const [artist, setArtist] = useState({});
+  const [previous, setPrevious] = useState([]);
+  const [leaderboard, setLeaderBoard] = useState([]);
   const [page, setPage] = useState('');
 
   useEffect(() => {
     (async () => {
-      const data = await axios.get('/api/newArtist')
-        .then(artist => {
-          setArtist(artist.data);
-        })
+      const todaysArtist = await axios.get('/api/newArtist')
+        .then(artist => artist.data)
         .catch(err => console.log(err));
+      const previousArtist = await axios.get('/api/prevArtists')
+        .then(artists => artists.data)
+        .catch(err => console.log(err));
+      const leaderboard = await axios.get('api/leaderboard')
+        .then(artists => artists.data)
+        .catch(err => console.log(err));
+      console.log(leaderboard);
+      setArtist(todaysArtist);
+      setPrevious(previousArtist);
+      setLeaderBoard(leaderboard);
     })()
   }, [])
 
   return (
     <>
-      <nav>
-        <div onClick={e => setPage(e.target.id)} id='previous'> Previous Days </div>
-        <div onClick={e => setPage(e.target.id)} id='today'> Today's Song </div>
-        <div onClick={e => setPage(e.target.id)} id='leaderboard'> Leaderboard </div>
-      </nav>
+      <Container />
+      <NavBar>
+        <Logo> Spotifind </Logo>
+        <NavBtn onClick={e => setPage(e.target.id)} id='previous'> Previous Days </NavBtn>
+        <MainBtn onClick={e => setPage(e.target.id)} id='today'> Today's Song </MainBtn>
+        <NavBtn onClick={e => setPage(e.target.id)} id='leaderboard'> Leaderboard </NavBtn>
+      </NavBar>
+      {page === 'previous' && <Previous previous={previous} page={page}/>}
       {page === 'today' && <Artist artist={artist} />}
-      {page === 'leaderboard' && <Leaderboard />}
-      {page === 'previous' && <Previous />}
+      {page === 'leaderboard' && <Leaderboard board={leaderboard}/>}
     </>
   )
 }
