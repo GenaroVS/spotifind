@@ -32,7 +32,7 @@ app.get('/api/newArtist', (req, res) => {
 });
 
 app.get('/api/prevArtists', (req, res) => {
-  db.selectArtist(4)
+  db.selectArtist(30)
     .then(artists => res.json(artists).end())
     .catch(err => console.log(err));
 });
