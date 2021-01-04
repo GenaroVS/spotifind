@@ -1,7 +1,7 @@
 const Query = require('./queries.js');
 const { Pool } = require('pg');
 const pool = new Pool({
-  connectionString: 'postgresql://postgres:Ximena.1@localhost:5432/spotifind'
+  connectionString: process.env.DATABASE_URL
 });
 
 pool.query(Query.artistTable)
