@@ -2,10 +2,7 @@ import React, { useEffect , useState} from 'react';
 import axios from 'axios';
 import { Page, InfoCont, Link , Info, Image} from '../styles/ArtistStyles.js';
 
-
-export default ({ artist, page }) => {
-
-  const [liked, setLiked] = useState(false);
+export default ({ artist, page, liked, setLiked }) => {
 
   function durFormat(duration) {
     var min = Math.floor(duration / 60000);
@@ -35,7 +32,7 @@ export default ({ artist, page }) => {
         <Info>
           <Link href={artist.track_page} target='_blank'>Track: {artist.track}</Link>
           {page !== 'previous' &&
-            <span style={{color: 'red'}} onClick={like}>
+            <span style={{color: 'red', marginLeft: '10px'}} onClick={like}>
               { liked ? <i className="fas fa-heart"></i> : <i className="far fa-heart"></i> }
             </span>
           }

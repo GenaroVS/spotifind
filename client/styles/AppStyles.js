@@ -46,6 +46,7 @@ const NavBtn = styled.button`
   border-radius: 10px;
   margin: 0 10px;
   height: 75px;
+  cursor: pointer;
 `;
 
 const MainBtn = styled(NavBtn)`

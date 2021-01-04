@@ -20,11 +20,15 @@ const Link = styled.a`
   display: inline-block;
   text-decoration: none;
   color: var(--dark-gray);
+
+  &:hover {
+    color: var(--main-color);
+  }
 `;
 
 const Info = styled.div`
   grid-area: 1 / 2 / 3 / 3;
-  margin-left: 10px;
+  margin-left: 20px;
 `;
 
 const Image = styled.img`

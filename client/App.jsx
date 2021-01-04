@@ -11,6 +11,7 @@ export default () => {
   const [previous, setPrevious] = useState([]);
   const [leaderboard, setLeaderBoard] = useState([]);
   const [page, setPage] = useState('');
+  const [liked, setLiked] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -23,9 +24,9 @@ export default () => {
       const leaderboard = await axios.get('api/leaderboard')
         .then(artists => artists.data)
         .catch(err => console.log(err));
-      console.log(leaderboard);
+
       setArtist(todaysArtist);
-      setPrevious(previousArtist);
+      setPrevious(previousArtist.slice(1));
       setLeaderBoard(leaderboard);
     })()
   }, [])
@@ -40,7 +41,7 @@ export default () => {
         <NavBtn onClick={e => setPage(e.target.id)} id='leaderboard'> Leaderboard </NavBtn>
       </NavBar>
       {page === 'previous' && <Previous previous={previous} page={page}/>}
-      {page === 'today' && <Artist artist={artist} />}
+      {page === 'today' && <Artist artist={artist} setLiked={setLiked} liked={liked}/>}
       {page === 'leaderboard' && <Leaderboard board={leaderboard}/>}
     </>
   )
