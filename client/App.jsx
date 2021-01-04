@@ -15,21 +15,23 @@ export default () => {
 
   useEffect(() => {
     (async () => {
-      const todaysArtist = await axios.get('/api/newArtist')
-        .then(artist => artist.data)
+      await axios.get('/api/newArtist')
+        .then(artist => setArtist(artist.data))
         .catch(err => console.log(err));
-      const previousArtist = await axios.get('/api/prevArtists')
-        .then(artists => artists.data)
+      await axios.get('/api/prevArtists')
+        .then(artists => setPrevious(artists.data.slice(1)))
         .catch(err => console.log(err));
-      const leaderboard = await axios.get('api/leaderboard')
-        .then(artists => artists.data)
+      await axios.get('/api/leaderboard')
+        .then(artists => setLeaderBoard(artists.data))
         .catch(err => console.log(err));
-
-      setArtist(todaysArtist);
-      setPrevious(previousArtist.slice(1));
-      setLeaderBoard(leaderboard);
     })()
   }, [])
+
+  useEffect(() => {
+    axios.get('/api/leaderboard')
+      .then(artists => setLeaderBoard(artists.data))
+      .catch(err => console.log(err));
+  }, [liked])
 
   return (
     <>

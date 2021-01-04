@@ -5,10 +5,12 @@ const allowCrossOrigin = require('./middleware/allowCrossOrigin');
 const spot = require('./spotify/controllers.js');
 const db = require('../database/postgres.js');
 
+
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(allowCrossOrigin);
 app.use(express.json());
 
-app.get('/newArtist', (req, res) => {
+app.get('/api/newArtist', (req, res) => {
   var newArtist;
   db.selectArtist(1)
     .then(artists => {
@@ -29,13 +31,13 @@ app.get('/newArtist', (req, res) => {
     .catch(err => console.log(err));
 });
 
-app.get('/prevArtists', (req, res) => {
+app.get('/api/prevArtists', (req, res) => {
   db.selectArtist(4)
     .then(artists => res.json(artists).end())
     .catch(err => console.log(err));
 });
 
-app.get('/leaderboard', (req, res) => {
+app.get('/api/leaderboard', (req, res) => {
   db.selectLB()
     .then(artists => {
       res.json(artists).end()
@@ -43,7 +45,7 @@ app.get('/leaderboard', (req, res) => {
     .catch(err => console.log(err));
 });
 
-app.put('/newLike/:id', (req, res) => {
+app.put('/api/newLike/:id', (req, res) => {
   db.updateLikes(parseInt(req.params.id))
     .then(response => res.send('Likes Updated').end())
     .catch(err => console.log(err));
