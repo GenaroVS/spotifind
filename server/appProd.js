@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.get('/api/newArtist', (req, res) => {
   var newArtist;
-  db.selectArtist(1)
+  db.selectArtist(1440)
     .then(artists => {
       if (artists.length === 0) {
         spot.find()
@@ -32,7 +32,7 @@ app.get('/api/newArtist', (req, res) => {
 });
 
 app.get('/api/prevArtists', (req, res) => {
-  db.selectArtist(30)
+  db.selectArtist(5760)
     .then(artists => res.json(artists).end())
     .catch(err => console.log(err));
 });
