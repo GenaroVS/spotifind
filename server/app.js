@@ -19,7 +19,7 @@ app.get('/newArtist', (req, res) => {
             return db.insertArtist(artist)
           })
           .then(response => {
-            res.json(newArtist).end();
+            res.json('New Artist Added').end();
           })
           .catch(err => console.log(err));
       } else {
@@ -30,7 +30,7 @@ app.get('/newArtist', (req, res) => {
 });
 
 app.get('/prevArtists', (req, res) => {
-  db.selectArtist(4)
+  db.selectArtist(15)
     .then(artists => res.json(artists).end())
     .catch(err => console.log(err));
 });

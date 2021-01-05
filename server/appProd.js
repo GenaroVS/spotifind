@@ -21,7 +21,7 @@ app.get('/api/newArtist', (req, res) => {
             return db.insertArtist(artist)
           })
           .then(response => {
-            res.json(newArtist).end();
+            res.json('New Artist Added').end();
           })
           .catch(err => console.log(err));
       } else {

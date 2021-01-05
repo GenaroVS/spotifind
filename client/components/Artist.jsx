@@ -11,6 +11,7 @@ export default ({ artist, page, liked, setLiked }) => {
   }
 
   function like() {
+    console.log(artist);
     if (!liked) {
       axios.put(`/api/newLike/${artist.id}`)
         .then(response => setLiked(!liked))

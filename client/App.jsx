@@ -16,10 +16,13 @@ export default () => {
   useEffect(() => {
     (async () => {
       await axios.get('/api/newArtist')
-        .then(artist => setArtist(artist.data))
+        .then(artist => console.log(artist.data))
         .catch(err => console.log(err));
       await axios.get('/api/prevArtists')
-        .then(artists => setPrevious(artists.data.slice(1)))
+        .then(artists => {
+          setArtist(artists.data[0]);
+          setPrevious(artists.data.slice(1))
+        })
         .catch(err => console.log(err));
       await axios.get('/api/leaderboard')
         .then(artists => setLeaderBoard(artists.data))
