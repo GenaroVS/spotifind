@@ -35,3 +35,4 @@ bower_components/
 .flooignore
 
 config.env
+server/spotify/config.js
