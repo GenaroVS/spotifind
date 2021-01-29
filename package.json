@@ -6,8 +6,8 @@
   "scripts": {
     "start": "webpack serve --config webpack.dev.js & env-cmd -e dev nodemon -x ts-node server/index.ts",
     "build": "webpack --config webpack.prod.js",
-    "build:server": "env-cmd -e prod node server/index.ts",
-    "postinstall": "tsc"
+    "postinstall": "tsc",
+    "build:server": "node built/server/index.js"
   },
   "repository": {
     "type": "git",
