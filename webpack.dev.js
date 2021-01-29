@@ -17,9 +17,6 @@ const dist = path.resolve('./public')
           protocol: 'http:',
           port: 3000
         },
-        pathRewrite: {
-          '^/api': ''
-        }
       }
     }
   }

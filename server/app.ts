@@ -1,7 +1,7 @@
 import express = require('express');
 const app = express();
 import path = require('path');
-import allowCrossOrigin = require('./middleware/allowCrossOrigin');
+import allowCrossOrigin from './middleware/allowCrossOrigin';
 import spot = require('./spotify/controllers.js');
 import db = require('../database/postgres.js');
 
