@@ -1,7 +1,7 @@
 const Query = require('./queries.js');
 const { Pool } = require('pg');
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || 'postgresql://postgres:Ximena.1@localhost:5432/spotifind'
+  connectionString: process.env.DATABASE_URL //|| 'postgresql://postgres:Ximena.1@localhost:5432/spotifind'
 });
 
 pool.query(Query.artistTable)
@@ -11,7 +11,7 @@ pool.query(Query.artistTable)
   .catch(err => console.log(err));
 
 const selectArtist = (daysWithin) => {
-  return pool.query(Query.getArtists, [daysWithin])
+  return pool.query(Query.getArtistsTest, [daysWithin])
     .then(res => res.rows)
     .catch(err => console.log(err));
 };

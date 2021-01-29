@@ -16,9 +16,12 @@ const newArtist = `INSERT INTO artists (name, followers, artist_photo, artist_pa
 track, duration, album_photo, preview, track_page, date)
 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
 
-const getArtists = `SELECT * FROM artists
+const getArtistsTest = `SELECT * FROM artists
 WHERE date + make_interval(mins => $1) >= (SELECT LOCALTIMESTAMP)
 ORDER BY id DESC;`;
+
+const getArtists = `SELECT * FROM artists
+WHERE extract(DAY FROM age(date)) <= $1 AND extract(MONTH FROM age(date)) = 0;`
 
 const incrLikes = 'UPDATE artists SET likes = likes + 1 WHERE id = $1;';
 
@@ -28,6 +31,7 @@ WHERE EXTRACT(MONTH FROM date) = EXTRACT(MONTH FROM (SELECT LOCALTIMESTAMP))`;
 module.exports = {
   artistTable,
   newArtist,
+  getArtistsTest,
   getArtists,
   incrLikes,
   getLeaderBoard,

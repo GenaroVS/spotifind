@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack serve --config webpack.dev.js & env-cmd -f ./config.env nodemon server/index.js",
     "build": "webpack --config webpack.prod.js",
-    "build:server": "node server/indexProd.js"
+    "build:server": "env-cmd -f ./config.env node server/indexProd.js"
   },
   "repository": {
     "type": "git",
