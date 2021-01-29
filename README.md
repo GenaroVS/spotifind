@@ -9,11 +9,19 @@
 ## Usage
 
 1. Create config.js in `server/spotify/` based on config_example.js
-2. Create config.env in the root dir with `DATABASE_URL=postgres://[username]:[password]@localhost:3306/[database]`
-3. `npx tsc` for typescript to compile
-4. npm run build
-5. npm run build:server
-6. npm run start
+2. Create a .env-cmdrc file in the root dir with
+   ``` json
+   {
+      "dev": {
+         "DATABASE_URL": "postgresql://postgres:Ximena.1@localhost:5432/spotifind"
+      },
+      "prod": {
+         "NODE_ENV": "production"
+      }
+   }
+3. npm run build
+4. npm run build:server
+5. npm run start
    * Optional: development with webpack server
 
 ## Requirements
