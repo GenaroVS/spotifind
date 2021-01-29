@@ -4,9 +4,9 @@
   "description": "Webpage designed to help users find underground artists on spotify",
   "main": "server/index.js",
   "scripts": {
-    "start": "webpack serve --config webpack.dev.js & env-cmd -f ./config.env nodemon built/server/index.js",
+    "start": "webpack serve --config webpack.dev.js & env-cmd -e dev nodemon built/server/index.js",
     "build": "webpack --config webpack.prod.js",
-    "build:server": "env-cmd -f ./config.env node server/indexProd.js"
+    "build:server": "env-cmd -e prod node built/server/index.js"
   },
   "repository": {
     "type": "git",

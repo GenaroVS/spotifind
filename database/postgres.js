@@ -24,7 +24,7 @@ const insertArtist = (artist) => {
 
 const updateLikes = (id) => {
   return pool.query(Query.incrLikes, [id])
-    .then(res => res)
+    .then(res => res.rowCount)
     .catch(err => console.log(err));
 };
 
