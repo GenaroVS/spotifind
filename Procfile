@@ -1,2 +1,2 @@
-release: npm run build && npx tsc
+release: npx tsc
 web: npm run build:server
