@@ -30,7 +30,7 @@ interface SelectedArtist extends NewArtist {
   likes: number;
 }
 
-app.get('/api/newArtist', (req, res) => {
+app.get('/api/newArtist', (req: any, res: any) => {
   db.selectArtist(1)
     .then((artists: SelectedArtist[]) => {
       if (artists.length === 0) {
@@ -46,19 +46,19 @@ app.get('/api/newArtist', (req, res) => {
     .catch((err: any) => console.log(err));
 });
 
-app.get('/api/prevArtists', (req, res) => {
+app.get('/api/prevArtists', (req: any, res: any) => {
   db.selectArtist(3)
     .then((artists: SelectedArtist[]) => res.json(artists).end())
     .catch((err: any) => console.log(err));
 });
 
-app.get('/api/leaderboard', (req, res) => {
+app.get('/api/leaderboard', (req: any, res: any) => {
   db.selectLB()
     .then((artists: SelectedArtist[]) => res.json(artists).end())
     .catch((err: any) => console.log(err));
 });
 
-app.put('/api/newLike/:id', (req, res) => {
+app.put('/api/newLike/:id', (req: any, res: any) => {
   db.updateLikes(parseInt(req.params.id))
     .then((rowCount: number) => res.send('Likes Updated for').end())
     .catch((err: any) => console.log(err));
