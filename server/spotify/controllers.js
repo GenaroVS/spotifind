@@ -1,12 +1,11 @@
-const {client_id, secret_id} = require('./config.js');
 const axios = require('axios');
 const qs = require('qs');
 const params = qs.stringify({grant_type: 'client_credentials'});
 
 const getToken = () => {
-  return axios.post('https://accounts.spotify.com/api/token', params, {
+  return axios.post(process.env.BASE_URL + '/api/token', params, {
     headers: {
-      'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + secret_id).toString('base64')),
+      'Authorization': 'Basic ' + (Buffer.from(process.env.CLIENT_ID + ':' + process.env.SECRET_ID).toString('base64')),
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   })

@@ -35,5 +35,6 @@ bower_components/
 .flooignore
 
 config.env
+.env-cmdrc
 server/spotify/config.js
 built

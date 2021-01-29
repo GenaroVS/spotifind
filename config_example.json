@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "DATABASE_URL": "DATABASE_URL=postgres://[username]:[password]@localhost:3306/[database]",
+    "BASE_URL": "https://api.spotify.com",
+    "CLIENT_ID": "YOUR CLIENT ID",
+    "SECRET_ID": "YOUR SECRET ID",
+  },
+  "prod": {
+    "DATABASE_URL": "DATABASE_URL=postgres://[username]:[password]@localhost:3306/[database]",
+    "BASE_URL": "https://api.spotify.com",
+    "CLIENT_ID": "YOUR CLIENT ID",
+    "SECRET_ID": "YOUR SECRET ID",
+    "NODE_ENV": "production"
+  }
+}
