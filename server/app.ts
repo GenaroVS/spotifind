@@ -1,9 +1,8 @@
-const express = require('express');
+import express = require('express');
 const app = express();
-const path = require('path')
-const allowCrossOrigin = require('./middleware/allowCrossOrigin');
-const spot = require('./spotify/controllers.js');
-const db = require('../database/postgres.js');
+import allowCrossOrigin = require('./middleware/allowCrossOrigin');
+import spot = require('./spotify/controllers.js');
+import db = require('../database/postgres.js');
 
 app.use(allowCrossOrigin);
 app.use(express.json());
@@ -49,4 +48,4 @@ app.put('/newLike/:id', (req, res) => {
     .catch(err => console.log(err));
 });
 
-module.exports = app;
+export = app;
