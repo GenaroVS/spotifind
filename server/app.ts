@@ -1,9 +1,9 @@
 import express = require('express');
 const app = express();
 import path = require('path');
-import allowCrossOrigin from './middleware/allowCrossOrigin';
-import spot = require('./spotify/controllers.js');
-import db = require('../database/postgres.js');
+const allowCrossOrigin = require('./middleware/allowCrossOrigin');
+const Spotify = require('./spotify/controllers');
+const db = require('../database/postgres');
 
 app.use(allowCrossOrigin);
 app.use(express.json());
@@ -11,6 +11,7 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../../public')));
 }
+console.log(typeof Spotify);
 
 interface NewArtist {
   name: string;
@@ -34,7 +35,7 @@ app.get('/api/newArtist', (req: any, res: any) => {
   db.selectArtist(1)
     .then((artists: SelectedArtist[]) => {
       if (artists.length === 0) {
-        spot.find()
+        Spotify.find()
           .then((artist: NewArtist) => db.insertArtist(artist))
           .then(() => db.selectArtist(1))
           .then((artists: SelectedArtist[]) => res.json(artists[0]).end())

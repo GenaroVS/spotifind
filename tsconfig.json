@@ -10,7 +10,7 @@
     "noImplicitAny": true,
     "noImplicitThis": true
   },
-  "include": ["./server/**/*"],
+  "include": ["./server", "./database"],
   "exclude": ["node_modules"],
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended"

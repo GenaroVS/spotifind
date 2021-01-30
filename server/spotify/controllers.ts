@@ -1,23 +1,49 @@
-const axios = require('axios');
-const qs = require('qs');
+import axios from 'axios';
+import qs from 'qs';
 const params = qs.stringify({grant_type: 'client_credentials'});
 
+interface Data {
+  q: string;
+  type: string
+  market: string;
+  limit: number;
+  offset: number;
+}
+
+interface ResArtist {
+  name: string,
+  followers: number,
+  artist_photo: string,
+  artist_page: string,
+}
+
+interface ResTrack {
+  track: string;
+  duration: number;
+  album_photo: string;
+  preview: string;
+  track_page: string;
+  date: Date;
+}
+
+interface Artist extends ResArtist, ResTrack {}
+
 const getToken = () => {
-  return axios.post(process.env.BASE_URL + '/api/token', params, {
+  return axios.post('https://accounts.spotify.com/api/token', params, {
     headers: {
-      'Authorization': 'Basic ' + (Buffer.from(process.env.CLIENT_ID + ':' + process.env.SECRET_ID).toString('base64')),
+      'Authorization': 'Basic ' + (Buffer.from(process.env.CLIENT_ID+':'+process.env.SECRET_ID).toString('base64')),
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   })
-    .then(response => {
+    .then((response: any): string => {
       console.log('Auth Status ', response.status);
       return response.data.access_token;
     })
-    .catch(err => console.log(err));
+    .catch((err: any) => console.log(err.response));
 };
 
-const getUnpopAlbum = (token) => {
-  var data = {
+const getUnpopAlbum = (token: string): Promise<Object> => {
+  var data: Data = {
     q: 'year:2020 tag:hipster',
     type: 'album',
     market: 'US',
@@ -35,7 +61,7 @@ const getUnpopAlbum = (token) => {
     .catch(err => console.log('Album Error ', err.response.data));
 };
 
-const getArtist = (token, artistUrl) => {
+const getArtist = (token: string, artistUrl: string): Promise<Object> => {
   return axios.get(artistUrl, {
     headers: { 'Authorization': 'Bearer ' + token }
   })
@@ -46,7 +72,7 @@ const getArtist = (token, artistUrl) => {
     .catch(err => console.log('Artist Error ', err.response.data));
 };
 
-const getTrack = (token, artist) => {
+const getTrack = (token: string, artist: Object): Promise<Object> => {
   return axios.get(artist + '/top-tracks', {
     params: {market: 'US'},
     headers: { 'Authorization': 'Bearer ' + token }
@@ -59,14 +85,14 @@ const getTrack = (token, artist) => {
 };
 
 const find = () => {
-  let token, resArtist, resTrack;
+  let token: string, resArtist: ResArtist, resTrack: ResTrack;
   return getToken()
-    .then(response => {
+    .then((response: string) => {
       token = response;
       return getUnpopAlbum(token);
     })
-    .then(album => getArtist(token, album.artists[0].href))
-    .then(artist => {
+    .then((album: any) => getArtist(token, album.artists[0].href))
+    .then((artist: any) => {
       resArtist = {
         name: artist.name,
         followers: artist.followers.total,
@@ -75,7 +101,7 @@ const find = () => {
       }
       return getTrack(token, artist.href)
     })
-    .then(track => {
+    .then((track: any): Artist => {
       resTrack = {
         track: track.name,
         duration: track.duration_ms,
@@ -90,5 +116,5 @@ const find = () => {
 }
 
 module.exports = {
-  find,
+  find
 }

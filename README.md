@@ -8,12 +8,14 @@
 
 ## Usage
 
-1. Create config.js in `server/spotify/` based on config_example.js
-2. Create config.env in the root dir with `DATABASE_URL=postgres://[username]:[password]@localhost:3306/[database]`
-3. npm run build
-4. npm run build:server
-4. npm run start
-   * Optional: development with webpack server
+1. Create config.js in `server/spotify/` based on config_example.js.
+2. Create `.env-cmdrc` file in the root dir based on `config_example.json`.
+3. For developement
+   * npm run dev:server
+   * npm run dev:build
+4. For production
+   * npm run build
+   * npm run build:local
 
 ## Requirements
 
