@@ -8,23 +8,24 @@
 
 ## Usage
 
-1. Create config.js in `server/spotify/` based on config_example.js.
-2. Create `.env-cmdrc` file in the root dir based on `config_example.json`.
-3. For developement
+1. Create `.env-cmdrc` file in the root dir based on `config_example.json`.
+2. For developement
    * npm run dev:server
    * npm run dev:build
-4. For production
+3. For production
    * npm run build
    * npm run build:local
 
 ## Requirements
 
-* Node >=15.2.1
-* PostgreSQL
+- [NVM: Node Version Manager](https://heynode.com/tutorial/install-nodejs-locally-nvm)
+   - Node >= 15.2.1
+   - NPM >= 7.0.8
+- [PostgreSQL](https://www.postgresql.org/download/)
 
 ## Dependencies
 
-From within the root directory:
+From within the root directory :
 
 ```sh
 npm install
