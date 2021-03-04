@@ -11,7 +11,6 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../../public')));
 }
-console.log(typeof Spotify);
 
 interface NewArtist {
   name: string;
