@@ -16,11 +16,13 @@ export default () => {
   useEffect(() => {
     (async () => {
       await axios.get('/api/newArtist')
-        .then(artist => console.log(artist.data))
+        .then(artist => {
+          setArtist(artist.data)
+        })
         .catch(err => console.log(err));
       await axios.get('/api/prevArtists')
         .then(artists => {
-          setArtist(artists.data[0]);
+          console.log(artists.data);
           setPrevious(artists.data.slice(1))
         })
         .catch(err => console.log(err));
@@ -35,7 +37,6 @@ export default () => {
       .then(artists => setLeaderBoard(artists.data))
       .catch(err => console.log(err));
   }, [liked])
-
   return (
     <>
       <Container />

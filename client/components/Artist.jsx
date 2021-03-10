@@ -1,8 +1,9 @@
 import React, { useEffect , useState} from 'react';
 import axios from 'axios';
-import { Page, InfoCont, Link , Info, Image} from '../styles/ArtistStyles.js';
+import { Page, InfoCont, Link , Info } from '../styles/ArtistStyles.js';
 
 export default ({ artist, page, liked, setLiked }) => {
+  const FOLLOW_EMBED = 'https://open.spotify.com/follow/1/?uri=';
 
   function durFormat(duration) {
     var min = Math.floor(duration / 60000);
@@ -10,37 +11,39 @@ export default ({ artist, page, liked, setLiked }) => {
     return min + 'min ' + sec + 's';
   }
 
+  function embedTrackFormat(trackUrl) {
+    return trackUrl.replace('track/', 'embed/track/')
+  }
+
   function like() {
-    console.log(artist);
     if (!liked) {
       axios.put(`/api/newLike/${artist.id}`)
         .then(response => setLiked(!liked))
         .catch(err => console.log(err));
     }
   }
-
+  console.log(artist);
   return (
     <Page>
-      <InfoCont>
-        <Image src={artist.artist_photo} alt='Artist Photo' />
+      <InfoCont photoUrl={artist.artist_photo}>
         <Info>
-          <Link href={artist.artist_page} target='_blank'>Artist: {artist.name}</Link>
-          <div>{artist.followers} Followers</div>
-        </Info>
-      </InfoCont>
-      <InfoCont>
-        <Image src={artist.album_photo} alt='Track Album Photo' />
-        <Info>
-          <Link href={artist.track_page} target='_blank'>Track: {artist.track}</Link>
+          <Link href={artist.artist_page} target='_blank'>{artist.name}</Link>
           {page !== 'previous' &&
             <span style={{color: 'red', marginLeft: '10px'}} onClick={like}>
               { liked ? <i className="fas fa-heart"></i> : <i className="far fa-heart"></i> }
             </span>
           }
-          <div>{durFormat(artist.duration)}</div>
-          <Link href={artist.preview} target='_blank'> Preview </Link>
+          <div>{artist.followers} Followers</div>
+          <iframe src={`${FOLLOW_EMBED}${artist.artist_uri}&show-count=0`} width='200' height='28' scrolling='no' frameBorder='0' allowtransparency='true'></iframe>
         </Info>
+        <iframe src={embedTrackFormat(artist.track_page)} width='400' height='80' frameBorder='0' allowtransparency='true' allow='encrypted-media'></iframe>
       </InfoCont>
     </Page>
   )
 };
+
+/**
+<iframe src={`${FOLLOW_EMBED}${artist.artist_uri}&show-count=0`} width='200' height='28' scrolling='no' frameBorder='0' allowtransparency='true'></iframe>
+
+<iframe src={embedTrackFormat(artist.track_page)} width='300' height='380' frameBorder='0' allowtransparency='true' allow='encrypted-media'></iframe>
+**/

@@ -4,17 +4,16 @@ name VARCHAR(100) NOT NULL,
 followers integer CHECK (followers >= 0),
 artist_photo VARCHAR(500),
 artist_page VARCHAR(500) NOT NULL,
+artist_uri VARCHAR(500) NOT NULL,
 track VARCHAR(100) NOT NULL,
 duration integer,
-album_photo VARCHAR(500),
-preview VARCHAR(500) NOT NULL,
 track_page VARCHAR(500) NOT NULL,
 likes integer DEFAULT 0,
 date timestamp NOT NULL);`;
 
 const newArtist: string = `INSERT INTO artists (name, followers, artist_photo, artist_page,
-track, duration, album_photo, preview, track_page, date)
-VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
+artist_uri, track, duration, track_page, date)
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
 
 const getArtistsTest: string = `SELECT * FROM artists
 WHERE date + make_interval(mins => $1) >= (SELECT LOCALTIMESTAMP)

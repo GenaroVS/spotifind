@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 const Page = styled.section`
   display: flex;
+  flex-direction: column;
+  align-items: center;
   box-sizing: border-box;
   width: 70%;
   margin: 0 auto;
@@ -9,35 +11,39 @@ const Page = styled.section`
   margin-bottom: 20px;
 `;
 
-const InfoCont = styled.div`
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 30% 70%;
-  width: 50%;
-`;
-
 const Link = styled.a`
   display: inline-block;
+  justify-content: flex-end;
   text-decoration: none;
   color: var(--dark-gray);
+  font-size: 24px !important;
 
   &:hover {
     color: var(--main-color);
   }
 `;
 
-const Info = styled.div`
-  grid-area: 1 / 2 / 3 / 3;
-  margin-left: 20px;
+const InfoCont = styled.div`
+  display: flex;
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255) 0%,
+      rgba(255, 255, 255, 0.4) 20%,
+      transparent),
+    url(${props => props.photoUrl});
+  background-size: cover;
+  width: 1000px;
+  height: 1000px;
+  padding: 15px;
 `;
 
-const Image = styled.img`
-  grid-area: 1 / 1 / 3 / 2;
+const Info = styled.div`
   width: 100%;
-  height: auto;
-  border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.3);
+
+  & > * {
+    margin-bottom: 5px;
+    font-size: 20px;
+  }
 `;
 
 export {
@@ -45,5 +51,4 @@ export {
   InfoCont,
   Link,
   Info,
-  Image
 }

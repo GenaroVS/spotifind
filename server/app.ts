@@ -31,7 +31,7 @@ interface SelectedArtist extends NewArtist {
 }
 
 app.get('/api/newArtist', (req: any, res: any) => {
-  db.selectArtist(1)
+  db.selectArtist(2)
     .then((artists: SelectedArtist[]) => {
       if (artists.length === 0) {
         Spotify.find()
@@ -47,7 +47,7 @@ app.get('/api/newArtist', (req: any, res: any) => {
 });
 
 app.get('/api/prevArtists', (req: any, res: any) => {
-  db.selectArtist(3)
+  db.selectArtist(8)
     .then((artists: SelectedArtist[]) => res.json(artists).end())
     .catch((err: any) => console.log(err));
 });

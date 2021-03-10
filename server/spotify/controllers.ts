@@ -15,13 +15,12 @@ interface ResArtist {
   followers: number,
   artist_photo: string,
   artist_page: string,
+  artist_uri: string
 }
 
 interface ResTrack {
   track: string;
   duration: number;
-  album_photo: string;
-  preview: string;
   track_page: string;
   date: Date;
 }
@@ -50,6 +49,7 @@ const getUnpopAlbum = (token: string): Promise<Object> => {
     limit: 1,
     offset: Math.floor(Math.random() * 2000)
   }
+
   return axios.get('https://api.spotify.com/v1/search', {
     params: data,
     headers: { 'Authorization': 'Bearer ' + token }
@@ -98,6 +98,7 @@ const find = () => {
         followers: artist.followers.total,
         artist_photo: artist.images[0].url,
         artist_page: artist.external_urls.spotify,
+        artist_uri: artist.uri
       }
       return getTrack(token, artist.href)
     })
@@ -105,8 +106,6 @@ const find = () => {
       resTrack = {
         track: track.name,
         duration: track.duration_ms,
-        album_photo: track.album.images[0].url,
-        preview: track.preview_url,
         track_page: track.external_urls.spotify,
         date: new Date()
       }

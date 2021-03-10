@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
 
 const Container = createGlobalStyle`
   body {
@@ -17,6 +17,12 @@ const Container = createGlobalStyle`
     --light-gray: #EEE;
     --dark-gray: #333;
   }
+`;
+
+const highlight = keyframes`
+  0% {transform: translateY(0);}
+  50% {transform: translateY(-5px);}
+  100% {transform: translateY(0);}
 `;
 
 const Logo = styled.h1`
@@ -47,6 +53,11 @@ const NavBtn = styled.button`
   margin: 0 10px;
   height: 75px;
   cursor: pointer;
+
+  &:hover {
+    animation: ${highlight} 1.5s cubic-bezier(.48,.3,.54,1.18);
+    animation-iteration-count: infinite;
+  }
 `;
 
 const MainBtn = styled(NavBtn)`
