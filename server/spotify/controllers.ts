@@ -47,7 +47,7 @@ const getUnpopAlbum = (token: string): Promise<Object> => {
     type: 'album',
     market: 'US',
     limit: 1,
-    offset: Math.floor(Math.random() * 2000)
+    offset: Math.floor(Math.random() * 1000)
   }
 
   return axios.get('https://api.spotify.com/v1/search', {
