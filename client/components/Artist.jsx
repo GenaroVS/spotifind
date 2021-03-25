@@ -1,9 +1,11 @@
-import React, { useEffect , useState} from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import { Page, InfoCont, Link , Info } from '../styles/ArtistStyles.js';
+import { AuthContext } from '../context.js';
 
-export default ({ artist, page, liked, setLiked }) => {
+export default ({ artist, liked, setLiked }) => {
   const FOLLOW_EMBED = 'https://open.spotify.com/follow/1/?uri=';
+  const isAuth = useContext(AuthContext);
 
   function durFormat(duration) {
     var min = Math.floor(duration / 60000);
@@ -22,13 +24,14 @@ export default ({ artist, page, liked, setLiked }) => {
         .catch(err => console.log(err));
     }
   }
+
   console.log(artist);
   return (
     <Page>
       <InfoCont photoUrl={artist.artist_photo}>
         <Info>
           <Link href={artist.artist_page} target='_blank'>{artist.name}</Link>
-          {page !== 'previous' &&
+          {isAuth &&
             <span style={{color: 'red', marginLeft: '10px'}} onClick={like}>
               { liked ? <i className="fas fa-heart"></i> : <i className="far fa-heart"></i> }
             </span>

@@ -36,7 +36,7 @@ const NavBar = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
   margin-bottom: 20px;
   padding: 0 100px;
@@ -51,6 +51,7 @@ const NavBtn = styled.button`
   border: none;
   border-radius: 10px;
   margin: 0 10px;
+  padding: 0 1.2em;
   height: 75px;
   cursor: pointer;
 
@@ -66,10 +67,31 @@ const MainBtn = styled(NavBtn)`
   font-size: 1.5rem;
 `;
 
+const UserPanel = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  align-items: center;
+`;
+
+const UserBtn = styled(NavBtn)`
+  flex: 1 0 auto;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  height: auto;
+  border: none;
+  border-radius: 10px;
+  margin: 5px 10px;
+  padding: 0.5em .8em;
+  cursor: pointer;
+`;
+
 export {
   NavBar,
   NavBtn,
   MainBtn,
   Container,
-  Logo
+  Logo,
+  UserPanel,
+  UserBtn
 }

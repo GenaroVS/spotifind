@@ -1,67 +1,50 @@
 import express = require('express');
-const app = express();
 import path = require('path');
+const session = require('express-session');
+const { ExpressOIDC } = require('@okta/oidc-middleware');
+const app = express();
 const allowCrossOrigin = require('./middleware/allowCrossOrigin');
-const Spotify = require('./spotify/controllers');
-const db = require('../database/postgres');
 
 app.use(allowCrossOrigin);
 app.use(express.json());
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../../public')));
-}
+app.use(express.static(path.join(__dirname, '../public')));
 
-interface NewArtist {
-  name: string;
-  followers: number
-  artist_photo: string;
-  artist_page: string;
-  track: string;
-  duration: number;
-  album_photo: string;
-  preview: string;
-  track_page: string;
-  date: Date;
-}
+app.use(session({
+  secret: '130d7d72684762cea0765d5ea6eff6419438620d930f912b923be2d3',
+  resave: true,
+  saveUninitialized: false,
+}));
 
-interface SelectedArtist extends NewArtist {
-  id: number;
-  likes: number;
-}
+const oidc = new ExpressOIDC({
+  issuer: `${process.env.OKTA_ORG_URL}/oauth2/default`,
+  client_id: process.env.OKTA_CLIENT_ID,
+  client_secret: process.env.OKTA_CLIENT_SECRET,
+  appBaseUrl: process.env.HOST_URL,
+  redirect_uri: `${process.env.HOST_URL}/authorization-code/callback`,
+  scope: 'openid profile'
+})
 
-app.get('/api/newArtist', (req: any, res: any) => {
-  db.selectArtist(2)
-    .then((artists: SelectedArtist[]) => {
-      if (artists.length === 0) {
-        Spotify.find()
-          .then((artist: NewArtist) => db.insertArtist(artist))
-          .then(() => db.selectArtist(1))
-          .then((artists: SelectedArtist[]) => res.json(artists[0]).end())
-          .catch((err: any) => console.log(err));
-      } else {
-        res.json(artists[0]).end();
-      }
-    })
-    .catch((err: any) => console.log(err));
+app.use(oidc.router);
+
+app.get('/authorization-code/callback', (req:any, res) => {
+  res.sendStatus(200);
 });
 
-app.get('/api/prevArtists', (req: any, res: any) => {
-  db.selectArtist(8)
-    .then((artists: SelectedArtist[]) => res.json(artists).end())
-    .catch((err: any) => console.log(err));
+app.post('/logout', oidc.forceLogoutAndRevoke(), (req: any, res) => {
+  if (req.userContext) {
+    const idToken = req.userContext.tokens.id_token;
+    const to = encodeURI(process.env.HOST_URL);
+    const params = `id_token_hint=${idToken}&post_logout_redirect_uri=${to}`;
+    req.logout();
+    res.redirect(`${process.env.OKTA_ORG_URL}/oauth2/default/v1/logout?${params}`);
+  } else {
+    res.redirect('/user');
+  }
 });
 
-app.get('/api/leaderboard', (req: any, res: any) => {
-  db.selectLB()
-    .then((artists: SelectedArtist[]) => res.json(artists).end())
-    .catch((err: any) => console.log(err));
-});
-
-app.put('/api/newLike/:id', (req: any, res: any) => {
-  db.updateLikes(parseInt(req.params.id))
-    .then((rowCount: number) => res.send('Likes Updated for').end())
-    .catch((err: any) => console.log(err));
-});
+app.use('/user', require('./routes/user'));
+app.use('/api', require('./routes/api'));
+app.use('/auth', oidc.ensureAuthenticated(), require('./routes/auth'));
 
 export = app;

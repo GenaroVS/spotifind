@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "dev:server": "env-cmd -e dev nodemon -x ts-node server/index.ts",
-    "dev:build": "webpack serve --config webpack.dev.js",
+    "dev:build": "webpack --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js & tsc",
     "server:local": "env-cmd -e prod node built/server/index.js",
     "server:heroku": "node built/server/index.js"
