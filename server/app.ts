@@ -8,7 +8,9 @@ const allowCrossOrigin = require('./middleware/allowCrossOrigin');
 app.use(allowCrossOrigin);
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '../public')));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../../public')));
+}
 
 app.use(session({
   secret: '130d7d72684762cea0765d5ea6eff6419438620d930f912b923be2d3',
