@@ -1,15 +1,19 @@
 import express from 'express';
 const okta = require('@okta/okta-sdk-nodejs')
 const router = express.Router();
-import axios from 'axios';
+import { addUserInfo } from '../middleware/extendUser';
 
 const client = new okta.Client({
   orgUrl: process.env.OKTA_ORG_URL,
   token: process.env.OKTA_TOKEN
 })
 
+router.use(addUserInfo);
+
 router.get('/', (req: any, res) => {
-  if (req.userContext) {
+  if (req.userContext && req.user) {
+    res.status(200).send({...req.userContext.userinfo, ...req.user});
+  } else if (req.userContext) {
     res.status(200).send(req.userContext.userinfo);
   } else {
     res.status(200).send(false);
@@ -51,17 +55,13 @@ router.post('/register', async (req, res) => {
 
     res.redirect('/user')
   } catch ({ errorCauses }) {
-    type errorsT = {
-      [index:string]: string;
-    }
-    const errors: errorsT = {}
+    const errors: string[] = []
 
     errorCauses.forEach(({ errorSummary }: error) => {
-      const [field, error] = /^(.+?): (.+)$/.exec(errorSummary)
-      errors[field] = error
+      errors.push(errorSummary)
     })
 
-    res.status(501).send(errors);
+    res.status(200).send(errors);
   }
 })
 

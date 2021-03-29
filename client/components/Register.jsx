@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Page, InputGroup, Submit, ErrorMsg } from '../styles/RegisterStyles.js';
 
 class Register extends React.Component {
   constructor(props) {
@@ -13,14 +14,15 @@ class Register extends React.Component {
       { name: 'password', label: 'Password', type: 'password' },
       { name: 'retyped', label: 'Retype Password', type: 'password' }
     ];
-    this.state = {
+    this.initialState = {
       firstName: '',
       lastName: '',
       email: '',
       password: '',
       retyped: '',
-      error: ''
-    }
+      errors: ''
+    };
+    this.state = this.initialState;
   }
 
   handleInputChange(event) {
@@ -37,7 +39,7 @@ class Register extends React.Component {
     if (this.state.password !== this.state.retyped) {
       this.setState({
         retyped: '',
-        error: 'Passwords don\'t match'
+        errors: 'Passwords don\'t match'
       })
       return;
     } else {
@@ -47,35 +49,47 @@ class Register extends React.Component {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
       })
-        .then(user => console.log(user))
+        .then(error => {
+          error ? this.setState({errors: error.data}) : this.setState(this.initialState);
+        })
         .catch(err => console.log(err));
     }
   }
 
-  render() {
+  showErrors(errors) {
+    if (typeof errors === 'string') {
+      return <ErrorMsg>{errors}</ErrorMsg>
+    }
 
+    return errors.map(err => {
+      return <ErrorMsg>{err}</ErrorMsg>
+    });
+  }
+
+  render() {
     return (
-      <form method="post">
-        {this.fields.map(field => {
-          return (
-            <div>
-              <label>{field.label}</label>
-              <input
-                required
-                name={field.name}
-                type={field.type}
-                value={this.state[field.name]}
-                onChange={this.handleInputChange}
-              />
-            </div>
-          )
-        })}
-        <button onClick={this.handleSubmit} type="submit">Register</button>
-        <div>{this.state.error}</div>
-      </form>
+      <Page>
+        <form method="post">
+          {this.fields.map(field => {
+            return (
+              <InputGroup>
+                <label>{field.label}</label>
+                <input
+                  required
+                  name={field.name}
+                  type={field.type}
+                  value={this.state[field.name]}
+                  onChange={this.handleInputChange}
+                />
+              </InputGroup>
+            )
+          })}
+          {this.showErrors(this.state.errors)}
+          <Submit onClick={this.handleSubmit} type="submit">Register</Submit>
+        </form>
+      </Page>
     )
   }
 }
 
 export default Register;
-//<div class="invalid-feedback">{field.error}</div>

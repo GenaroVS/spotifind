@@ -23,20 +23,3 @@ const dist = path.resolve('./public')
     ],
   } */
  });
-
-/*  {
-  '/': {
-    target: {
-      host: '127.0.0.1',
-      protocol: 'http:',
-      port: 3000
-    },
-  },
-  '/user': {
-    target: {
-      host: '127.0.0.1',
-      protocol: 'http:',
-      port: 3000
-    },
-  }
-} */

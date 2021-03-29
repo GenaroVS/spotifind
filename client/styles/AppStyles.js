@@ -77,13 +77,16 @@ const UserPanel = styled.div`
 const UserBtn = styled(NavBtn)`
   flex: 1 0 auto;
   font-size: 1.1rem;
-  letter-spacing: 2px;
   height: auto;
   border: none;
   border-radius: 10px;
   margin: 5px 10px;
   padding: 0.5em .8em;
   cursor: pointer;
+  width: 105px;
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 0.5rem;
 `;
 
 export {

@@ -67,8 +67,13 @@ export default () => {
             <UserBtn onClick={e => setPage(e.target.id)} id='register'> Sign Up </UserBtn>
           </UserPanel>
         </NavBar>
-        {page === 'previous' && <Previous previous={previous}/>}
-        {page === 'today' && <Artist artist={artist} setLiked={setLiked} liked={liked}/>}
+        {page === 'previous' && <Previous page={page} previous={previous}/>}
+        {page === 'today' &&
+          <Artist
+            artist={artist}
+            setLiked={setLiked}
+            liked={liked}
+            page={page}/>}
         {page === 'leaderboard' && <Leaderboard board={leaderboard}/>}
         {page === 'register' && <Register />}
     </AuthContext.Provider>
