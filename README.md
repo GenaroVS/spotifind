@@ -9,10 +9,11 @@
 ## Usage
 
 1. Create `.env-cmdrc` file in the root dir based on `config_example.json`.
-2. For developement
+2. For Okta and Spotify fields, check requirements below.
+3. For developement
    * npm run dev:server
    * npm run dev:build
-3. For production
+4. For production
    * npm run build
    * npm run build:local
 
@@ -22,6 +23,12 @@
    - Node >= 15.2.1
    - NPM >= 7.0.8
 - [PostgreSQL](https://www.postgresql.org/download/)
+- You need to register a Spotify app to access it's API
+  - [Spotify App credentials](https://developer.spotify.com/documentation/general/guides/app-settings/#register-your-app)
+- For user registration, I used Okta Authorization
+  - Create a developer account with [Okta](https://www.okta.com/).
+  - [Create Okta Application](https://developer.okta.com/docs/guides/sign-into-web-app/nodeexpress/create-okta-application/) and add credentials to .env.
+  - You can generate a token: Okta Admin -> Security -> API -> Tokens -> Create Token
 
 ## Dependencies
 

@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(session({
-  secret: '130d7d72684762cea0765d5ea6eff6419438620d930f912b923be2d3',
+  secret: process.env.SESH_SECRET,
   resave: true,
   saveUninitialized: false,
 }));

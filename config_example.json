@@ -4,12 +4,24 @@
     "SPOT_URL": "https://api.spotify.com",
     "CLIENT_ID": "YOUR CLIENT ID",
     "SECRET_ID": "YOUR SECRET ID",
+    "HOST_URL": "",
+    "SESH_SECRET": "RANDOM STRING",
+    "OKTA_ORG_URL": "",
+    "OKTA_CLIENT_ID": "",
+    "OKTA_CLIENT_SECRET": "",
+    "OKTA_TOKEN": ""
   },
   "prod": {
     "DATABASE_URL": "DATABASE_URL=postgres://[username]:[password]@localhost:3306/[database]",
     "SPOT_URL": "https://api.spotify.com",
     "CLIENT_ID": "YOUR CLIENT ID",
     "SECRET_ID": "YOUR SECRET ID",
+    "HOST_URL": "",
+    "SESH_SECRET": "RANDOM STRING",
+    "OKTA_ORG_URL": "",
+    "OKTA_CLIENT_ID": "",
+    "OKTA_CLIENT_SECRET": "",
+    "OKTA_TOKEN": "",
     "NODE_ENV": "production"
   }
 }
