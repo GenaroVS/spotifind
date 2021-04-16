@@ -26,7 +26,11 @@ export default ({ artist, liked, setLiked, page }) => {
   }
 
   if (!artist.artist_photo) {
-    return <div>Loading...</div>
+    return (
+      <Page>
+        <h1>Loading...</h1>
+      </Page>
+    )
   }
 
   return (
