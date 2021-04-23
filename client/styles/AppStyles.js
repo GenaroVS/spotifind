@@ -1,12 +1,13 @@
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
 
-const Container = createGlobalStyle`
+export const Container = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-size: 16px;
     font-family: Helvetica, sans-serif;
+    overflow-x: hidden;
   }
 
   :root {
@@ -19,19 +20,19 @@ const Container = createGlobalStyle`
   }
 `;
 
-const highlight = keyframes`
+export const highlight = keyframes`
   0% {transform: translateY(0);}
   50% {transform: translateY(-5px);}
   100% {transform: translateY(0);}
 `;
 
-const Logo = styled.h1`
+export const Logo = styled.h1`
   font-size: 50px;
   margin-right: 200px;
   color: var(--dark-gray);
 `;
 
-const NavBar = styled.nav`
+export const NavBar = styled.nav`
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -42,7 +43,7 @@ const NavBar = styled.nav`
   padding: 0 100px;
 `;
 
-const NavBtn = styled.button`
+export const NavBtn = styled.button`
   flex: 1 0 auto;
   color: var(--dark-gray);
   background-color: var(--light-gray);
@@ -61,40 +62,8 @@ const NavBtn = styled.button`
   }
 `;
 
-const MainBtn = styled(NavBtn)`
+export const MainBtn = styled(NavBtn)`
   flex: 3 0 auto;
   background-color: var(--main-color);
   font-size: 1.5rem;
 `;
-
-const UserPanel = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: auto;
-  align-items: center;
-`;
-
-const UserBtn = styled(NavBtn)`
-  flex: 1 0 auto;
-  font-size: 1.1rem;
-  height: auto;
-  border: none;
-  border-radius: 10px;
-  margin: 5px 10px;
-  padding: 0.5em .8em;
-  cursor: pointer;
-  width: 105px;
-  background-color: var(--secondary-color);
-  color: white;
-  border-radius: 0.5rem;
-`;
-
-export {
-  NavBar,
-  NavBtn,
-  MainBtn,
-  Container,
-  Logo,
-  UserPanel,
-  UserBtn
-}

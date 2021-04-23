@@ -5,6 +5,7 @@ import Artist from './components/Artist.jsx';
 import Leaderboard from './components/LeaderBoard.jsx';
 import Previous from './components/Previous.jsx';
 import Register from './components/Register.jsx';
+import SideBar from './components/SideBar.jsx';
 import { Logo, Container, NavBar, NavBtn, MainBtn, UserPanel, UserBtn } from './styles/AppStyles.js';
 import { AuthContext } from './context.js';
 
@@ -47,26 +48,15 @@ export default () => {
 
   return (
     <AuthContext.Provider value={isAuth}>
-      <Container />
+      <Container/>
         <NavBar>
           <Logo> Spotifind </Logo>
           <NavBtn onClick={e => setPage(e.target.id)} id='previous'> Previous Days </NavBtn>
           <MainBtn onClick={e => setPage(e.target.id)} id='today'> Today's Song </MainBtn>
           <NavBtn onClick={e => setPage(e.target.id)} id='leaderboard'> Leaderboard </NavBtn>
-          <UserPanel>
-            {!isAuth ? (
-              <form action='/login'>
-                  <UserBtn type='submit'> Log In </UserBtn>
-                </form>
-              ) : (
-                <form method='post' action='/logout'>
-                  <UserBtn type='submit'> Log Out </UserBtn>
-                </form>
-              )
-            }
-            <UserBtn onClick={e => setPage(e.target.id)} id='register'> Sign Up </UserBtn>
-          </UserPanel>
         </NavBar>
+        <SideBar setPage={setPage} />
+
         {page === 'previous' && <Previous page={page} previous={previous}/>}
         {page === 'today' &&
           <Artist

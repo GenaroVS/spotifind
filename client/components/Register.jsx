@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Page, InputGroup, Submit, ErrorMsg } from '../styles/RegisterStyles.js';
+import { Features, Page, InputGroup, Submit, ErrorMsg } from '../styles/RegisterStyles.js';
 
 class Register extends React.Component {
   constructor(props) {
@@ -69,6 +69,14 @@ class Register extends React.Component {
   render() {
     return (
       <Page>
+        <Features>
+          <h2> Register to be able to: </h2>
+          <ul>
+            <li><i class="fas fa-check"></i>Like today's song and contribute to the leaderboard </li>
+            <li><i class="fas fa-check"></i>Favorite songs to listen to later </li>
+            <li><i class="fas fa-check"></i>Access to new features </li>
+          </ul>
+        </Features>
         <form method="post">
           {this.fields.map(field => {
             return (

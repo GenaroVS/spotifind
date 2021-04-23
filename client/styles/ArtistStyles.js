@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Page = styled.section`
+export const Page = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,7 +11,7 @@ const Page = styled.section`
   margin-bottom: 20px;
 `;
 
-const Link = styled.a`
+export const Link = styled.a`
   display: inline-block;
   justify-content: flex-end;
   text-decoration: none;
@@ -23,7 +23,7 @@ const Link = styled.a`
   }
 `;
 
-const InfoCont = styled.div`
+export const InfoCont = styled.div`
   display: flex;
   background-image:
     linear-gradient(
@@ -37,18 +37,15 @@ const InfoCont = styled.div`
   padding: 15px;
 `;
 
-const Info = styled.div`
+export const Info = styled.div`
   width: 100%;
 
   & > * {
     margin-bottom: 5px;
     font-size: 20px;
   }
-`;
 
-export {
-  Page,
-  InfoCont,
-  Link,
-  Info,
-}
+  & span {
+    cursor: pointer;
+  }
+`;

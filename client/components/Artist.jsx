@@ -5,7 +5,7 @@ import { AuthContext } from '../context.js';
 
 export default ({ artist, liked, setLiked, page }) => {
   const FOLLOW_EMBED = 'https://open.spotify.com/follow/1/?uri=';
-  const isAuth = useContext(AuthContext);
+  const user = useContext(AuthContext);
 
   function durFormat(duration) {
     var min = Math.floor(duration / 60000);
@@ -38,9 +38,9 @@ export default ({ artist, liked, setLiked, page }) => {
       <InfoCont photoUrl={artist.artist_photo}>
         <Info>
           <Link href={artist.artist_page} target='_blank'>{artist.name}</Link>
-          {isAuth && page === 'today' &&
+          {user && page === 'today' &&
             <span style={{color: 'red', marginLeft: '10px'}} onClick={like}>
-              { liked || isAuth.liked === artist.id
+              { liked || user.liked === artist.id
                 ? <i className="fas fa-heart"></i>
                 : <i className="far fa-heart"></i> }
             </span>

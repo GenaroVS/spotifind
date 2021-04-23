@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Page = styled.section`
+export const Page = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,7 +11,27 @@ const Page = styled.section`
   margin-bottom: 20px;
 `;
 
-const InputGroup = styled.div`
+export const Features = styled.section`
+  width: 50vw;
+  margin-bottom: 50px;
+
+  & h3 {
+
+  }
+
+  & li {
+    list-style: none;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+
+  & li i {
+    margin-right: 0.5rem;
+    color: var(--secondary-color);
+  }
+`;
+
+export const InputGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin: 1rem 0;
@@ -34,7 +54,7 @@ const InputGroup = styled.div`
 `;
 
 
-const Submit = styled.button`
+export const Submit = styled.button`
   font-size: 1.3rem;
   letter-spacing: 2px;
   border: none;
@@ -47,15 +67,8 @@ const Submit = styled.button`
   display: inline-block;
 `;
 
-const ErrorMsg = styled.div`
+export const ErrorMsg = styled.div`
   color: red;
   font-size: 1.1rem;
   margin: 20px 0;
 `;
-
-export {
-  Page,
-  InputGroup,
-  Submit,
-  ErrorMsg
-}
