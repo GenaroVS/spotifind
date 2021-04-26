@@ -1,6 +1,7 @@
 import express from 'express';
 const okta = require('@okta/okta-sdk-nodejs')
 const router = express.Router();
+import { insertUser } from '../../database/models';
 import { addUserInfo } from '../middleware/extendUser';
 
 const client = new okta.Client({
@@ -28,9 +29,9 @@ router.use('/register', (req: any, res, next) => {
   next()
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', async (req: any, res: any) => {
   const { body } = req
-  interface error {
+  interface OktaError {
     errorCode: number;
     errorSummary: string;
     errorLink: string;
@@ -39,7 +40,7 @@ router.post('/register', async (req, res) => {
   }
 
   try {
-    await client.createUser({
+    var user = await client.createUser({
       profile: {
         firstName: body.firstName,
         lastName: body.lastName,
@@ -53,13 +54,18 @@ router.post('/register', async (req, res) => {
       }
     })
 
-    res.redirect('/user')
-  } catch ({ errorCauses }) {
+    await insertUser({ id: user.id, status: user.status, ...user.profile });
+    res.status(200).send('Registration Complete: please login');
+  } catch (err) {
     const errors: string[] = []
 
-    errorCauses.forEach(({ errorSummary }: error) => {
-      errors.push(errorSummary)
-    })
+    if (err.errorCauses) {
+      err.errorCauses.forEach(({ errorSummary }: OktaError) => {
+        errors.push(errorSummary)
+      });
+    } else {
+      console.log(err);
+    };
 
     res.status(200).send(errors);
   }

@@ -1,4 +1,4 @@
-const Query = require('./queries');
+import * as Query from './queries';
 const { Pool } = require('pg');
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -32,43 +32,25 @@ interface DBResponse {
   rowCount: number;
 }
 
-pool.query(Query.artistTable)
-  .then(() => {
-    console.log('Table Added');
-  })
-  .catch((err: any) => console.log(err));
+(async () => {
+  const client = await pool.connect();
 
-const selectArtist = (daysWithin: number) => {
-  return pool.query(Query.getArtistsTest, [daysWithin])
-    .then((res: DBResponse): SelectedArtist[] => res.rows)
-    .catch((err: any) => console.log(err));
-};
+  try {
+    await client.query('BEGIN');
+    await client.query(Query.artistTable);
+    console.log('Artist table added');
+    await client.query(Query.userTable);
+    console.log('User table added');
+    await client.query(Query.user_artists);
+    console.log('Join table added');
+    await client.query('COMMIT');
+    console.log('All tables added');
+  } catch(err) {
+    await client.query('ROLLBACK');
+    console.error(err);
+  } finally {
+    client.release();
+  }
+})().catch(err => console.error(err.stack))
 
-const insertArtist = (artist: NewArtist ) => {
-  return pool.query(Query.newArtist, Object.values(artist))
-    .then((res: DBResponse): DBResponse => res)
-    .catch((err: any) => console.log(err));
-};
-
-const updateLikes = (id: number) => {
-  return pool.query(Query.incrLikes, [id])
-    .then((res: DBResponse): number => res.rowCount)
-    .catch((err: any) => console.log(err));
-};
-
-const selectLB = () => {
-  return pool.query(Query.getLeaderBoard)
-    .then((res: DBResponse): SelectedArtist[] => {
-      return res.rows.sort((a, b) => {
-        return b.likes - a.likes;
-      });
-    })
-    .catch((err: any) => console.log(err));
-}
-
-module.exports = {
-  selectArtist,
-  insertArtist,
-  updateLikes,
-  selectLB
-}
+export = pool;

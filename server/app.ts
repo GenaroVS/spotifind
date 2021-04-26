@@ -2,8 +2,8 @@ import express = require('express');
 import path = require('path');
 const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
-const app = express();
 const allowCrossOrigin = require('./middleware/allowCrossOrigin');
+const app = express();
 
 app.use(allowCrossOrigin);
 app.use(express.json());
