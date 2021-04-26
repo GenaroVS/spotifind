@@ -68,6 +68,7 @@ export const Feature = styled.li`
     font-weight: bold;
     letter-spacing: 2px;
     color: var(--dark-gray);
+    cursor: pointer;
   }
 `;
 

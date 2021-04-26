@@ -49,8 +49,11 @@ class Register extends React.Component {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
       })
-        .then(error => {
-          error ? this.setState({errors: error.data}) : this.setState(this.initialState);
+        .then(res => {
+          console.log(res.data);
+          typeof res.data !== 'string' ?
+            this.setState({errors: res.data}) :
+            this.setState({...this.initialState});
         })
         .catch(err => console.log(err));
     }
@@ -72,9 +75,9 @@ class Register extends React.Component {
         <Features>
           <h2> Register to be able to: </h2>
           <ul>
-            <li><i class="fas fa-check"></i>Like today's song and contribute to the leaderboard </li>
-            <li><i class="fas fa-check"></i>Favorite songs to listen to later </li>
-            <li><i class="fas fa-check"></i>Access to new features </li>
+            <li><i className="fas fa-check"></i>Like today's song and contribute to the leaderboard </li>
+            <li><i className="fas fa-check"></i>Curate a favorites list </li>
+            <li><i className="fas fa-check"></i>Access to new features </li>
           </ul>
         </Features>
         <form method="post">

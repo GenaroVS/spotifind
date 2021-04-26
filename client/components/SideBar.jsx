@@ -5,7 +5,7 @@ import { AuthContext } from '../context.js';
 const SideBar = ({ setPage }) => {
   const [isToggled, setToggle] = useState(false);
   const user = useContext(AuthContext);
-  console.log(user);
+
   return (
     <>
       <Toggle
@@ -17,8 +17,8 @@ const SideBar = ({ setPage }) => {
         <Header>{ user ? 'Profile' : 'No user' }</Header>
         <Options>
           { user && <Feature>Info</Feature> }
-          <Feature>
-            <button id='register' onClick={(e) => setPage(e.target.id)}> Sign Up </button>
+          <Feature id='register' onClick={(e) => setPage(e.target.id)}>
+            Sign Up
           </Feature>
           <Feature>
             {!user ? (
@@ -32,7 +32,11 @@ const SideBar = ({ setPage }) => {
               )
             }
           </Feature>
-          { user && <Feature>Favorites</Feature> }
+          { user && (
+            <Feature id='favorites' onClick={(e) => setPage(e.target.id)}>
+              Favorites
+            </Feature>
+          )}
         </Options>
       </SideBarCont>
     </>

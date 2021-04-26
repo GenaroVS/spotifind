@@ -6,7 +6,8 @@ import Leaderboard from './components/LeaderBoard.jsx';
 import Previous from './components/Previous.jsx';
 import Register from './components/Register.jsx';
 import SideBar from './components/SideBar.jsx';
-import { Logo, Container, NavBar, NavBtn, MainBtn, UserPanel, UserBtn } from './styles/AppStyles.js';
+import Favorites from './components/Favorites.jsx';
+import { Logo, Container, NavBar, NavBtn, MainBtn } from './styles/AppStyles.js';
 import { AuthContext } from './context.js';
 
 export default () => {
@@ -66,6 +67,7 @@ export default () => {
             page={page}/>}
         {page === 'leaderboard' && <Leaderboard board={leaderboard}/>}
         {page === 'register' && <Register />}
+        {page === 'favorites' && <Favorites />}
     </AuthContext.Provider>
   )
 }

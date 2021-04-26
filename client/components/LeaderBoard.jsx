@@ -1,10 +1,8 @@
 import React, { useEffect , useState} from 'react';
-import styled from 'styled-components';
-import { Page, Rank, Image, Column, Header } from '../styles/BoardStyles.js';
+import { Page, Header } from '../styles/BoardStyles.js';
+import ArtistItem from './ArtistItem.jsx';
 
-export default ({ board }) => {
-
-
+const LeaderBoard = ({ board }) => {
   return (
     <Page>
       <Header>
@@ -13,19 +11,10 @@ export default ({ board }) => {
         <div style={{gridArea: '1/5/1/6', textAlign: 'center'}}>Likes</div>
       </Header>
       {board.map((artist, i) => {
-        return (
-          <Rank>
-            <h3>{i + 1}</h3>
-            <Image src={artist.artist_photo} alt='Artist Photo' />
-            <Column>{artist.name}</Column>
-            <Column>{artist.track}</Column>
-            <Column>
-              {artist.likes}
-              <i style={{marginLeft: '5px', color: 'red'}} className="fas fa-heart"></i>
-            </Column>
-          </Rank>
-        )
+        return <ArtistItem key={i} idx={i} artist={artist} />
       })}
     </Page>
   )
 };
+
+export default LeaderBoard;
