@@ -26,7 +26,7 @@ router.put('/newLike/:id', (req: any, res: any) => {
 
   db.updateLikes(parseInt(req.params.id))
     .then((rowCount: number) => res.send('Likes Updated for').end())
-    .catch((err: any) => console.log(err));
+    .catch((err: any) => console.error(err));
 });
 
 
@@ -40,13 +40,14 @@ router.post('/favorites', (req, res) => {
   console.log(req.body);
   var { userId, artistId } = req.body;
   db.insertFavorite(userId, artistId)
-    .then((rowCount: number) => res.send('Added Favorite').end())
+    .then((resText: string) => res.send(resText).end())
     .catch((err: object) => console.error(err));
 });
 
 
 router.delete('/favorites', (req, res) => {
   var { userId, artistId } = req.body;
+  console.log(req.body);
   db.deleteFavorite(userId, artistId)
     .then((rowCount: number) => res.send('Deleted Favorite').end())
     .catch((err: object) => console.error(err));

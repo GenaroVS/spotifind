@@ -38,7 +38,7 @@ router.get('/newArtist', (req: any, res: any) => {
 });
 
 router.get('/prevArtists', (req: any, res: any) => {
-  db.selectArtist(8)
+  db.selectArtist(10)
     .then((artists: SelectedArtist[]) => res.json(artists).end())
     .catch((err: object) => console.log(err));
 });

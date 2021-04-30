@@ -80,9 +80,13 @@ export const selectFavorites = (userId: string) => {
     .catch((err: object) => console.error(err));
 };
 
-export const insertFavorite = (userId: string, artistId: number) => {
+export const insertFavorite = async (userId: string, artistId: number) => {
+  var result =  await pool.query(Query.checkFavorite, [userId, artistId]);
+
+  if (result.rows.length > 0) return 'Already Favorited';
+
   return pool.query(Query.addFavorite, [userId, artistId])
-    .then((res: DBResponse): number => res.rowCount)
+    .then((res: DBResponse): string => 'Favorite Added')
     .catch((err: object) => console.error(err));
 };
 

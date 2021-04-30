@@ -22,8 +22,6 @@ user_id text REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
 artist_id integer REFERENCES artists(id) ON UPDATE CASCADE ON DELETE CASCADE,
 CONSTRAINT artist_user_key PRIMARY KEY (artist_id, user_id))`;
 
-
-
 export const newArtist: string = `INSERT INTO artists (name, followers, artist_photo, artist_page,
 artist_uri, track, duration, track_page, date)
 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
@@ -49,6 +47,9 @@ export const addFavorite: string = `INSERT INTO user_artists (user_id, artist_id
 VALUES ($1, $2)`;
 
 export const deleteFavorite: string = ` DELETE FROM user_artists
+WHERE user_id = $1 AND artist_id = $2`;
+
+export const checkFavorite: string = `SELECT * FROM user_artists
 WHERE user_id = $1 AND artist_id = $2`;
 
 export const incrLikes: string = 'UPDATE artists SET likes = likes + 1 WHERE id = $1;';
