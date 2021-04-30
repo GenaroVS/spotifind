@@ -10,6 +10,10 @@ export const FavCont = styled.section`
     text-align: center;
     font-size: 3rem;
   }
+
+  h3 {
+    text-align: center;
+  }
 `;
 
 export const List = styled.section`

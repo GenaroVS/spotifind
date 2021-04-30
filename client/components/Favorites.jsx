@@ -42,12 +42,13 @@ const Favorites = () => {
       .catch(err => console.error(err));
   }, [])
 
+
   return (
     <FavCont>
       <h1>{formatTitle(user.given_name)}</h1>
       <List>
-        {
-          favorites.length && favorites.map((artist, i) => {
+        { favorites.length > 0 ?
+          favorites.map((artist, i) => {
             return (
               <Favorite id={artist.id}>
                 <ArtistItem key={i} idx={i} artist={artist} />
@@ -57,8 +58,10 @@ const Favorites = () => {
                   className="fas fa-times"></i>
               </Favorite>
             )
-          })
+          }) :
+          <h3>No Favorites</h3>
         }
+
       </List>
     </FavCont>
   )
