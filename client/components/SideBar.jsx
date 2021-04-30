@@ -1,5 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { Toggle, SideBarCont, Header, Options, Feature } from '../styles/SideBarStyles.js';
+import {
+  Toggle,
+  SideBarCont,
+  HeaderCont,
+  Header,
+  Options,
+  Feature
+} from '../styles/SideBarStyles.js';
 import { AuthContext } from '../context.js';
 
 const SideBar = ({ setPage }) => {
@@ -14,19 +21,29 @@ const SideBar = ({ setPage }) => {
         isToggled={isToggled}>
       </Toggle>
       <SideBarCont isToggled={isToggled}>
-        <Header>{ user ? 'Profile' : 'No user' }</Header>
+        <HeaderCont>
+          <Header>{ user ? user.name : 'No user' }</Header>
+        </HeaderCont>
         <Options>
-          { user && <Feature>Info</Feature> }
+          { user &&
+            <Feature>
+              <i class="fas fa-info-circle"></i>
+              Info
+            </Feature>
+          }
           <Feature id='register' onClick={(e) => setPage(e.target.id)}>
+            <i class="fas fa-user-plus"></i>
             Sign Up
           </Feature>
           <Feature>
             {!user ? (
                 <form action='/login'>
+                  <i class="fas fa-sign-in-alt"></i>
                   <button type='submit'> Login </button>
                 </form>
               ) : (
                 <form method='post' action='/logout'>
+                  <i class="fas fa-sign-in-alt"></i>
                   <button type='submit'> Logout </button>
                 </form>
               )
@@ -34,6 +51,7 @@ const SideBar = ({ setPage }) => {
           </Feature>
           { user && (
             <Feature id='favorites' onClick={(e) => setPage(e.target.id)}>
+              <i class="fas fa-star"></i>
               Favorites
             </Feature>
           )}
