@@ -11,15 +11,15 @@ const Column = styled.span`
   text-align: center;
 `;
 
-const Rank = styled.li`
+const Rank = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100px;
-  margin-bottom: 20px;
   padding: 10px 0 10px 10px;
   border-radius: 5px;
   background-color: var(--light-gray);
+  width: 100%;
 `;
 
 export {

@@ -46,6 +46,26 @@ export const Info = styled.div`
   }
 
   & span {
+    position: relative;
     cursor: pointer;
+    margin-left: 10px;
+  }
+
+  & span .fa-heart {
+    color: red;
+    transition: transform 100ms linear;
+  }
+
+  & span .fa-heart:active {
+    transform: scale(0.8);
+  }
+
+  & span .fa-star {
+    color: var(--main-color);
+    transition: transform 100ms linear;
+  }
+
+  & span .fa-star:active {
+    transform: scale(0.8);
   }
 `;

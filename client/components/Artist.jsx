@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Page, InfoCont, Link , Info } from '../styles/ArtistStyles.js';
+import Popup from './Popup.jsx';
 import { AuthContext } from '../context.js';
 
 export default ({ artist, liked, setLiked, page }) => {
   const FOLLOW_EMBED = 'https://open.spotify.com/follow/1/?uri=';
   const user = useContext(AuthContext);
+  const [hasFav, setFavoriteRes] = useState('');
 
   function durFormat(duration) {
     var min = Math.floor(duration / 60000);
@@ -18,11 +20,34 @@ export default ({ artist, liked, setLiked, page }) => {
   }
 
   function like() {
+    var popup = document.getElementById('popup-liked');
+    popup.classList.toggle('open');
+
+    setTimeout(() => {
+      popup.classList.toggle('open');
+    }, 2000);
+
     if (!liked) {
       axios.put(`/auth/newLike/${artist.id}`)
-        .then(response => setLiked(!liked))
+        .then(res => setLiked(!liked))
         .catch(err => console.log(err));
     }
+  }
+
+  function favorite() {
+    var popup = document.getElementById('popup-fav');
+    popup.classList.toggle('open');
+    setTimeout(() => {
+      popup.classList.toggle('open');
+    }, 2000);
+
+
+    axios.post('/auth/favorites', {
+      userId: user.sub,
+      artistId: artist.id
+    })
+      .then(res => setFavoriteRes(res.data))
+      .catch(err => console.err(err));
   }
 
   if (!artist.artist_photo) {
@@ -39,11 +64,18 @@ export default ({ artist, liked, setLiked, page }) => {
         <Info>
           <Link href={artist.artist_page} target='_blank'>{artist.name}</Link>
           {user && page === 'today' &&
-            <span style={{color: 'red', marginLeft: '10px'}} onClick={like}>
-              { liked || user.liked === artist.id
-                ? <i className="fas fa-heart"></i>
-                : <i className="far fa-heart"></i> }
-            </span>
+            <>
+              <span onClick={like}>
+                { liked || user.liked === artist.id
+                  ? <i className="fas fa-heart"></i>
+                  : <i className="far fa-heart"></i> }
+                <Popup id='liked' content='Liked'/>
+              </span>
+              <span onClick={favorite} >
+                <Popup id='fav' content={hasFav}/>
+                <i class="fas fa-star"></i>
+              </span>
+            </>
           }
           <div>{artist.followers} Followers</div>
           <iframe

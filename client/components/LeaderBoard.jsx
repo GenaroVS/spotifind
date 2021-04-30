@@ -11,7 +11,10 @@ const LeaderBoard = ({ board }) => {
         <div style={{gridArea: '1/5/1/6', textAlign: 'center'}}>Likes</div>
       </Header>
       {board.map((artist, i) => {
-        return <ArtistItem key={i} idx={i} artist={artist} />
+        return <ArtistItem
+                  key={i}
+                  idx={i}
+                  artist={artist} />
       })}
     </Page>
   )

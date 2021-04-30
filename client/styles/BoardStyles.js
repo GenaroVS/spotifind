@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 
-const Page = styled.ul`
+const Page = styled.section`
   box-sizing: border-box;
   width: 70%;
   margin: 0 auto;
   padding: 0 100px;
+  display: flex;
+  flex-direction: column;
+
+  div {
+    margin-bottom: 20px;
+  }
 `;
 
 const Header = styled.div`
