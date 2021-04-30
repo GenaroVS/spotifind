@@ -1,5 +1,5 @@
 import React from 'react';
-import { Rank, Image, Column } from '../styles/ArtistItemStyles.js';
+import { Rank, Image, Column, Link } from '../styles/ArtistItemStyles.js';
 
 
 const ArtistItem = ({ artist, idx }) => {
@@ -7,7 +7,7 @@ const ArtistItem = ({ artist, idx }) => {
     <Rank>
       <h3>{idx + 1}</h3>
       <Image src={artist.artist_photo} alt='Artist Photo' />
-      <Column>{artist.name}</Column>
+      <Link href={artist.artist_page} target='_blank'>{artist.name}</Link>
       <Column>{artist.track}</Column>
       <Column>
         {artist.likes}
