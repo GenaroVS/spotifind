@@ -78,6 +78,7 @@ class Register extends React.Component {
             <li><i className="fas fa-check"></i>Like today's song and contribute to the leaderboard </li>
             <li><i className="fas fa-check"></i>Curate a favorites list </li>
             <li><i className="fas fa-check"></i>Access to new features </li>
+            <li><i className="fas fa-times"></i>No SSL yet so register without sensitive info </li>
           </ul>
         </Features>
         <form method="post">
