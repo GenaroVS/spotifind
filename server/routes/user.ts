@@ -3,6 +3,7 @@ const okta = require('@okta/okta-sdk-nodejs')
 const router = express.Router();
 import { insertUser } from '../../database/models';
 import { addUserInfo } from '../middleware/extendUser';
+import { OktaError } from '../types';
 
 const client = new okta.Client({
   orgUrl: process.env.OKTA_ORG_URL,
@@ -31,13 +32,6 @@ router.use('/register', (req: any, res, next) => {
 
 router.post('/register', async (req: any, res: any) => {
   const { body } = req
-  interface OktaError {
-    errorCode: number;
-    errorSummary: string;
-    errorLink: string;
-    errorId: number;
-    errorCauses?: object;
-  }
 
   try {
     var user = await client.createUser({

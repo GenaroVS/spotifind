@@ -50,8 +50,8 @@ const Favorites = () => {
         { favorites.length > 0 ?
           favorites.map((artist, i) => {
             return (
-              <Favorite id={artist.id}>
-                <ArtistItem key={i} idx={i} artist={artist} />
+              <Favorite key={artist.id} id={artist.id}>
+                <ArtistItem key={artist.id} idx={i} artist={artist} />
                 <i
                   id={artist.id}
                   onClick={deleteFav}

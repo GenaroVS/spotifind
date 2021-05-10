@@ -2,24 +2,7 @@ import express from 'express';
 const router = express.Router()
 const Spotify = require('../spotify/controllers');
 import * as db from '../../database/models';
-
-interface NewArtist {
-  name: string;
-  followers: number
-  artist_photo: string;
-  artist_page: string;
-  track: string;
-  duration: number;
-  album_photo: string;
-  preview: string;
-  track_page: string;
-  date: Date;
-}
-
-interface SelectedArtist extends NewArtist {
-  id: number;
-  likes: number;
-}
+import { NewArtist, SelectedArtist } from '../types';
 
 router.get('/newArtist', (req: any, res: any) => {
   db.selectArtist(2)

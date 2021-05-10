@@ -1,41 +1,11 @@
 import pool from './postgres';
 import * as Query from './queries';
-
-interface NewArtist {
-  name: string;
-  followers: number
-  artist_photo: string;
-  artist_page: string;
-  track: string;
-  duration: number;
-  album_photo: string;
-  preview: string;
-  track_page: string;
-  date: Date;
-}
-
-interface OktaUser {
-  id: string;
-  status: string;
-  firstName: string;
-  lastName: string;
-  mobilePhone: string | null;
-  secondEmail: string | null;
-  login: string;
-  email: string;
-};
-
-interface SelectedArtist extends NewArtist {
-  id: number;
-  likes: number;
-}
-
-interface DBResponse {
-  rows: SelectedArtist[];
-  fields: any[];
-  command: string;
-  rowCount: number;
-}
+import {
+  OktaUser,
+  DBResponse,
+  NewArtist,
+  SelectedArtist
+} from '../server/types';
 
 export const selectArtist = (daysWithin: number) => {
   return pool.query(Query.getArtistsTest, [daysWithin])

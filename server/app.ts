@@ -1,12 +1,14 @@
 import express = require('express');
 import path = require('path');
 const session = require('express-session');
+const compression = require('compression');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
 const allowCrossOrigin = require('./middleware/allowCrossOrigin');
 const app = express();
 
 app.use(allowCrossOrigin);
 app.use(express.json());
+app.use(compression());
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../../public')));

@@ -1,25 +1,9 @@
 import express from 'express';
 import { likes } from '../middleware/extendUser';
 import * as db from '../../database/models';
+import { SelectedArtist } from '../types';
 const router = express.Router()
 
-interface NewArtist {
-  name: string;
-  followers: number
-  artist_photo: string;
-  artist_page: string;
-  track: string;
-  duration: number;
-  album_photo: string;
-  preview: string;
-  track_page: string;
-  date: Date;
-}
-
-interface SelectedArtist extends NewArtist {
-  id: number;
-  likes: number;
-}
 
 router.put('/newLike/:id', (req: any, res: any) => {
   likes[req.userContext.userinfo.sub] = Number(req.params.id);

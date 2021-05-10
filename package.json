@@ -25,6 +25,7 @@
     "@okta/oidc-middleware": "^4.0.3",
     "@okta/okta-sdk-nodejs": "^4.4.0",
     "axios": "^0.21.1",
+    "compression": "^1.7.4",
     "env-cmd": "^10.1.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",

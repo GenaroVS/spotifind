@@ -7,31 +7,6 @@ const pool = new Pool({
   }
 });
 
-interface NewArtist {
-  name: string;
-  followers: number
-  artist_photo: string;
-  artist_page: string;
-  track: string;
-  duration: number;
-  album_photo: string;
-  preview: string;
-  track_page: string;
-  date: Date;
-}
-
-interface SelectedArtist extends NewArtist {
-  id: number;
-  likes: number;
-}
-
-interface DBResponse {
-  rows: SelectedArtist[];
-  fields: any[];
-  command: string;
-  rowCount: number;
-}
-
 (async () => {
   const client = await pool.connect();
 

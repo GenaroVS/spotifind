@@ -1,31 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
+import { Data, ResArtist, ResTrack, Artist } from '../types';
 const params = qs.stringify({grant_type: 'client_credentials'});
-
-interface Data {
-  q: string;
-  type: string
-  market: string;
-  limit: number;
-  offset: number;
-}
-
-interface ResArtist {
-  name: string,
-  followers: number,
-  artist_photo: string,
-  artist_page: string,
-  artist_uri: string
-}
-
-interface ResTrack {
-  track: string;
-  duration: number;
-  track_page: string;
-  date: Date;
-}
-
-interface Artist extends ResArtist, ResTrack {}
 
 const getToken = () => {
   return axios.post('https://accounts.spotify.com/api/token', params, {
