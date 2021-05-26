@@ -4,7 +4,6 @@ import * as db from '../../database/models';
 import { SelectedArtist } from '../types';
 const router = express.Router()
 
-
 router.put('/newLike/:id', (req: any, res: any) => {
   likes[req.userContext.userinfo.sub] = Number(req.params.id);
 

@@ -21,9 +21,15 @@ export const Container = createGlobalStyle`
 `;
 
 export const highlight = keyframes`
-  0% {transform: translateY(0);}
-  50% {transform: translateY(-5px);}
-  100% {transform: translateY(0);}
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 `;
 
 export const Logo = styled.h1`

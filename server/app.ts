@@ -5,16 +5,12 @@ const compression = require('compression');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
 const allowCrossOrigin = require('./middleware/allowCrossOrigin');
 const app = express();
+const rootPath = path.join(__dirname, '../');
 
 app.use(allowCrossOrigin);
 app.use(express.json());
 app.use(compression());
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../../public')));
-} else {
-  app.use(express.static(path.join(__dirname, '../public')));
-}
 
 app.use(session({
   secret: process.env.SESH_SECRET,
@@ -52,5 +48,17 @@ app.post('/logout', oidc.forceLogoutAndRevoke(), (req: any, res) => {
 app.use('/user', require('./routes/user'));
 app.use('/api', require('./routes/api'));
 app.use('/auth', oidc.ensureAuthenticated(), require('./routes/auth'));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(rootPath, '../public')));
+  app.get('/*', function (req, res) {
+    res.sendFile(path.join(rootPath, '../public/index.html'));
+  });
+} else {
+  app.use(express.static(path.join(rootPath, 'public')));
+  app.get('/*', function (req, res) {
+    res.sendFile(path.join(rootPath, 'public/index.html'));
+  });
+}
 
 export = app;

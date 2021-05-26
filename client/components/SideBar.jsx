@@ -7,6 +7,7 @@ import {
   Options,
   Feature
 } from '../styles/SideBarStyles.js';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../context.js';
 
 const SideBar = ({ setPage }) => {
@@ -31,10 +32,12 @@ const SideBar = ({ setPage }) => {
               Info
             </Feature>
           }
-          <Feature id='register' onClick={(e) => setPage(e.target.id)}>
-            <i class="fas fa-user-plus"></i>
-            Sign Up
-          </Feature>
+          <Link to='/register'>
+            <Feature id='register' onClick={(e) => setPage(e.target.id)}>
+              <i class="fas fa-user-plus"></i>
+              Sign Up
+            </Feature>
+          </Link>
           <Feature>
             {!user ? (
                 <form action='/login'>
@@ -50,10 +53,12 @@ const SideBar = ({ setPage }) => {
             }
           </Feature>
           { user && (
-            <Feature id='favorites' onClick={(e) => setPage(e.target.id)}>
-              <i class="fas fa-star"></i>
-              Favorites
-            </Feature>
+            <Link to='/favorites'>
+              <Feature id='favorites' onClick={(e) => setPage(e.target.id)}>
+                <i class="fas fa-star"></i>
+                Favorites
+              </Feature>
+            </Link>
           )}
         </Options>
       </SideBarCont>
