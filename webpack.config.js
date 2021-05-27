@@ -10,7 +10,7 @@ module.exports = ({ mode, presets } = { mode: "prod", presets: [] }) => {
   return webpackMerge({
       entry: src,
       output: {
-        filename: 'bundle.js',
+        filename: '[name].[contenthash].js',
         path: dist,
         clean: true
       },

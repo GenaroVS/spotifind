@@ -7,11 +7,30 @@ import {
 } from "react-router-dom";
 import axios from 'axios';
 
-const Artist = lazy(() => import('./components/Artist.jsx'));
-const Leaderboard = lazy(() => import('./components/LeaderBoard.jsx'));
-const Previous = lazy(() => import('./components/Previous.jsx'));
-const Register = lazy(() => import('./components/Register.jsx'));
-const Favorites = lazy(() => import('./components/Favorites.jsx'));
+const Artist = lazy(() => import(
+  /* webpackChunkName: "Artist" */
+  /* webpackPrefetch: true */
+  './components/Artist.jsx'
+));
+const Leaderboard = lazy(() => import(
+  /* webpackChunkName: "Leaderboard" */
+  /* webpackPrefetch: true */
+  './components/LeaderBoard.jsx'
+));
+const Previous = lazy(() => import(
+  /* webpackChunkName: "Previous" */
+  /* webpackPrefetch: true */
+  './components/Previous.jsx'
+));
+const Register = lazy(() => import(
+  /* webpackChunkName: "Register" */
+  './components/Register.jsx'
+));
+const Favorites = lazy(() => import(
+  /* webpackChunkName: "Favorites" */
+  './components/Favorites.jsx'
+));
+
 import SideBar from './components/SideBar.jsx';
 import { Logo, Container, NavBar, NavBtn, MainBtn } from './styles/AppStyles.js';
 import { AuthContext } from './context.js';
