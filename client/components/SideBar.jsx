@@ -10,7 +10,7 @@ import {
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../utils/context.js';
 
-const SideBar = ({ setPage }) => {
+const SideBar = () => {
   const [isToggled, setToggle] = useState(false);
   const user = useContext(AuthContext);
 
@@ -25,7 +25,7 @@ const SideBar = ({ setPage }) => {
         <HeaderCont>
           <Header>{ user ? user.name : 'No user' }</Header>
         </HeaderCont>
-        <Options>
+        <Options onClick={() => setToggle(!isToggled)}>
           { user &&
             <Feature>
               <i className="fas fa-info-circle"></i>

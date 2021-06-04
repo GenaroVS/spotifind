@@ -43,7 +43,7 @@ export const NavBar = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   margin-bottom: 20px;
   padding: 0 100px;

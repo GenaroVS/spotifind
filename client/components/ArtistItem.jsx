@@ -7,7 +7,9 @@ const ArtistItem = ({ artist, idx }) => {
     <Rank>
       <h3>{idx + 1}</h3>
       <Image src={artist.artist_photo} alt='Artist Photo' />
-      <Link href={artist.artist_page} target='_blank'>{artist.name}</Link>
+      <Column>
+        <Link href={artist.artist_page} target='_blank'>{artist.name}</Link>
+      </Column>
       <Column>{artist.track}</Column>
       <Column>
         {artist.likes}
