@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { AuthContext } from '../context.js';
+import { AuthContext } from '../utils/context.js';
 import ArtistItem from './ArtistItem.jsx';
 import { List, Favorite, FavCont } from '../styles/FavoritesStyles.js';
 

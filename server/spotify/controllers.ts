@@ -3,6 +3,19 @@ import qs from 'qs';
 import { Data, ResArtist, ResTrack, Artist } from '../types';
 const params = qs.stringify({grant_type: 'client_credentials'});
 
+const errorHandler = (error: any, title = 'Error') => {
+  console.log(title.toUpperCase());
+  if (error.response) {
+    console.log(error.response.data);
+    console.log(error.response.status);
+    console.log(error.response.headers);
+  } else if (error.request) {
+    console.log(error.request);
+  } else {
+    console.log('Error', error.message);
+  }
+}
+
 const getToken = () => {
   return axios.post('https://accounts.spotify.com/api/token', params, {
     headers: {
@@ -14,7 +27,7 @@ const getToken = () => {
       console.log('Auth Status ', response.status);
       return response.data.access_token;
     })
-    .catch((err: any) => console.log(err.response));
+    .catch(err => errorHandler(err));
 };
 
 const getUnpopAlbum = (token: string): Promise<Object> => {
@@ -34,7 +47,7 @@ const getUnpopAlbum = (token: string): Promise<Object> => {
       console.log('Album Status ', response.status);
       return response.data.albums.items[0];
     })
-    .catch(err => console.log('Album Error ', err.response.data));
+    .catch(err => errorHandler(err, 'Album Error'));
 };
 
 const getArtist = (token: string, artistUrl: string): Promise<Object> => {
@@ -45,7 +58,7 @@ const getArtist = (token: string, artistUrl: string): Promise<Object> => {
       console.log('Artist Status ', response.status);
       return response.data;
     })
-    .catch(err => console.log('Artist Error ', err.response.data));
+    .catch(err => errorHandler(err, 'Artist Error'));
 };
 
 const getTrack = (token: string, artist: Object): Promise<Object> => {
@@ -57,7 +70,7 @@ const getTrack = (token: string, artist: Object): Promise<Object> => {
     console.log('Track Status ', response.status);
     return response.data.tracks[0];
   })
-  .catch(err => console.log('Track Error ', err.response.data));
+  .catch(err => errorHandler(err, 'Track Error'));
 };
 
 const find = () => {

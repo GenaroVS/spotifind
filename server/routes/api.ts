@@ -5,7 +5,7 @@ import * as db from '../../database/models';
 import { NewArtist, SelectedArtist } from '../types';
 
 router.get('/newArtist', (req: any, res: any) => {
-  db.selectArtist(2)
+  db.selectArtist(60)
     .then((artists: SelectedArtist[]) => {
       if (artists.length === 0) {
         Spotify.find()
@@ -21,7 +21,7 @@ router.get('/newArtist', (req: any, res: any) => {
 });
 
 router.get('/prevArtists', (req: any, res: any) => {
-  db.selectArtist(10)
+  db.selectArtist(180)
     .then((artists: SelectedArtist[]) => res.json(artists).end())
     .catch((err: object) => console.log(err));
 });

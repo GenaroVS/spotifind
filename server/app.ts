@@ -23,7 +23,6 @@ app.use(allowCrossOrigin);
 app.use(express.json());
 app.use(compression());
 
-
 app.use(session({
   secret: process.env.SESH_SECRET,
   resave: true,
@@ -42,7 +41,7 @@ const oidc = new ExpressOIDC({
 app.use(oidc.router);
 
 app.get('/authorization-code/callback', (req:any, res) => {
-  res.sendStatus(200);
+  res.redirect('/');
 });
 
 app.post('/logout', oidc.forceLogoutAndRevoke(), (req: any, res) => {

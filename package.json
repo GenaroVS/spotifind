@@ -23,6 +23,7 @@
   "homepage": "https://github.com/GenaroVS/winter_mvp_project#_PRESS-RELEASE",
   "dependencies": {
     "@babel/runtime": "^7.12.5",
+    "@okta/jwt-verifier": "^2.1.0",
     "@okta/oidc-middleware": "^4.0.3",
     "@okta/okta-sdk-nodejs": "^4.4.0",
     "axios": "^0.21.1",

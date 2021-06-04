@@ -2,9 +2,9 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Page, InfoCont, Link , Info } from '../styles/ArtistStyles.js';
 import Popup from './Popup.jsx';
-import { AuthContext } from '../context.js';
+import { AuthContext } from '../utils/context.js';
 
-export default ({ artist, liked, setLiked, page }) => {
+export default ({ artist, liked, setLiked }) => {
   const FOLLOW_EMBED = 'https://open.spotify.com/follow/1/?uri=';
   const user = useContext(AuthContext);
   const [hasFav, setFavoriteRes] = useState('');
@@ -63,7 +63,7 @@ export default ({ artist, liked, setLiked, page }) => {
       <InfoCont photoUrl={artist.artist_photo}>
         <Info>
           <Link href={artist.artist_page} target='_blank'>{artist.name}</Link>
-          {user && page === 'today' &&
+          {user &&
             <>
               <span onClick={like}>
                 { liked || user.liked === artist.id
@@ -73,7 +73,7 @@ export default ({ artist, liked, setLiked, page }) => {
               </span>
               <span onClick={favorite} >
                 <Popup id='fav' content={hasFav}/>
-                <i class="fas fa-star"></i>
+                <i className="fas fa-star"></i>
               </span>
             </>
           }

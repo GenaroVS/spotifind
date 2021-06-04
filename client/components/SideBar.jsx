@@ -8,7 +8,7 @@ import {
   Feature
 } from '../styles/SideBarStyles.js';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../context.js';
+import { AuthContext } from '../utils/context.js';
 
 const SideBar = ({ setPage }) => {
   const [isToggled, setToggle] = useState(false);
@@ -28,34 +28,34 @@ const SideBar = ({ setPage }) => {
         <Options>
           { user &&
             <Feature>
-              <i class="fas fa-info-circle"></i>
+              <i className="fas fa-info-circle"></i>
               Info
             </Feature>
           }
-          <Link to='/register'>
+          <Link to='/register' style={{textDecoration: 'none'}}>
             <Feature id='register' onClick={(e) => setPage(e.target.id)}>
-              <i class="fas fa-user-plus"></i>
+              <i className="fas fa-user-plus"></i>
               Sign Up
             </Feature>
           </Link>
           <Feature>
             {!user ? (
                 <form action='/login'>
-                  <i class="fas fa-sign-in-alt"></i>
+                  <i className="fas fa-sign-in-alt"></i>
                   <button type='submit'> Login </button>
                 </form>
               ) : (
                 <form method='post' action='/logout'>
-                  <i class="fas fa-sign-in-alt"></i>
+                  <i className="fas fa-sign-in-alt"></i>
                   <button type='submit'> Logout </button>
                 </form>
               )
             }
           </Feature>
           { user && (
-            <Link to='/favorites'>
+            <Link to='/favorites' style={{textDecoration: 'none'}}>
               <Feature id='favorites' onClick={(e) => setPage(e.target.id)}>
-                <i class="fas fa-star"></i>
+                <i className="fas fa-star"></i>
                 Favorites
               </Feature>
             </Link>
