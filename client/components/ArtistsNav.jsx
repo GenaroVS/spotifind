@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Header, Label, SearchCont } from '../styles/ArtistsNavStyles.js';
-import throttle from 'lodash/throttle';
+import debounce from 'lodash/debounce';
+
 
 const ArtistsNav = ({ setSearch, setCategory }) => {
   const [input, setInput] = useState('');
-
-  const onChangeHandler = throttle((e) => {
+  const search = (val) => setSearch(val);
+  const delayedSearch = useCallback(debounce(search, 1000), []);
+  const onChangeHandler = (e) => {
     setInput(e.target.value);
-  }, 10000, { leading: true });
+    delayedSearch(e.target.value);
+  }
 
-  const onSubmitHandler = () => {
-    setSearch(input)
-    setInput('');
-  };
+  useEffect(() => delayedSearch.cancel, [])
 
   return (
     <Header>
@@ -22,7 +22,6 @@ const ArtistsNav = ({ setSearch, setCategory }) => {
           type='text'
           placeholder='title or track'
           value={input}></input>
-        <button onClick={onSubmitHandler}> Search </button>
       </SearchCont>
       <Label onClick={(e) => setCategory(e.target.textContent)}>Artist</Label>
       <Label onClick={(e) => setCategory(e.target.textContent)}>Track</Label>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 import { AuthContext } from '../utils/context.js';
 import ArtistItem from './ArtistItem.jsx';
 import { List, Favorite, FavCont } from '../styles/FavoritesStyles.js';
 
 
-function formatTitle(name) {
+function formatTitle(name = 'John Smith') {
   var lastChar = name[name.length - 1];
   return lastChar === 's' || lastChar === 'S' ?
     `${name}' Best of the Worst` :
@@ -50,8 +51,8 @@ const Favorites = () => {
         { favorites.length > 0 ?
           favorites.map((artist, i) => {
             return (
-              <Favorite key={artist.id} id={artist.id}>
-                <ArtistItem key={artist.id} idx={i} artist={artist} />
+              <Favorite key={uuidv4()} id={artist.id}>
+                <ArtistItem key={uuidv4()} idx={i} artist={artist} />
                 <i
                   id={artist.id}
                   onClick={deleteFav}
