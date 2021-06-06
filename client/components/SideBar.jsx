@@ -54,7 +54,7 @@ const SideBar = () => {
           </Feature>
           { user && (
             <Link to='/favorites' style={{textDecoration: 'none'}}>
-              <Feature id='favorites' onClick={(e) => setPage(e.target.id)}>
+              <Feature id='favorites'>
                 <i className="fas fa-star"></i>
                 Favorites
               </Feature>

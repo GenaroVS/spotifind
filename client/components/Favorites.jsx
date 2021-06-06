@@ -1,24 +1,30 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { AuthContext } from '../utils/context.js';
 import ArtistItem from './ArtistItem.jsx';
+import ArtistsNav from './ArtistsNav.jsx';
+import { AuthContext } from '../utils/context.js';
+import useArtistsFilter from '../utils/useArtistsFilter.js';
 import { List, Favorite, FavCont } from '../styles/FavoritesStyles.js';
 
 
-function formatTitle(name = 'John Smith') {
+const formatTitle = (name = 'John Smith') => {
   var lastChar = name[name.length - 1];
   return lastChar === 's' || lastChar === 'S' ?
     `${name}' Best of the Worst` :
     `${name}'s Best of the Worst`;
-}
+};
 
 const Favorites = () => {
-  const [favorites, setFavorites] = useState([]);
+  const [initFavs, setInitFavorites] = useState([]);
+  const [search, setSearch] = useState('');
+  const [category, setCategory] = useState('');
+  const [isDecr, setIsDecr] = useState(true);
+  const favorites = useArtistsFilter(initFavs, { search, category, isDecr })
   const user = useContext(AuthContext);
-  console.log(user);
+  console.log('User: ', user);
 
-  function deleteFav(e) {
+  const deleteFav = (e) => {
     let artistId = e.currentTarget.id;
     axios.delete('/auth/favorites', {
       data: {
@@ -27,26 +33,31 @@ const Favorites = () => {
       }
     })
       .then(res => {
-        var filtered = favorites.filter(artist => {
+        let filtered = favorites.filter(artist => {
           return artist.id !== Number(artistId)
         });
-        setFavorites(filtered);
+        console.log(filtered);
+        setInitFavorites(filtered);
       })
       .catch(err => console.error(err));
-  }
+  };
 
   useEffect(() => {
     axios.get(`/auth/favorites/${user.sub}`)
       .then(favData => {
-        setFavorites(favData.data)
+        setInitFavorites(favData.data)
       })
       .catch(err => console.error(err));
   }, [])
 
-
   return (
     <FavCont>
       <h1>{formatTitle(user.given_name)}</h1>
+      <ArtistsNav
+        setSearch={setSearch}
+        setCategory={setCategory}
+        isDecr={isDecr}
+        setIsDecr={setIsDecr} />
       <List>
         { favorites.length > 0 ?
           favorites.map((artist, i) => {
@@ -59,10 +70,8 @@ const Favorites = () => {
                   className="fas fa-times"></i>
               </Favorite>
             )
-          }) :
-          <h3>No Favorites</h3>
+          }) : <h3>No Favorites</h3>
         }
-
       </List>
     </FavCont>
   )

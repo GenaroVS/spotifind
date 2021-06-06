@@ -4,20 +4,21 @@ import { Page, InfoCont, Link , Info } from '../styles/ArtistStyles.js';
 import Popup from './Popup.jsx';
 import { AuthContext } from '../utils/context.js';
 
+function durFormat(duration) {
+  var min = Math.floor(duration / 60000);
+  var sec = Math.floor((duration - (min * 60000)) / 1000);
+  return min + 'min ' + sec + 's';
+}
+
+function embedTrackFormat(trackUrl) {
+  return trackUrl.replace('track/', 'embed/track/')
+}
+
 export default ({ artist, liked, setLiked }) => {
   const FOLLOW_EMBED = 'https://open.spotify.com/follow/1/?uri=';
   const user = useContext(AuthContext);
   const [hasFav, setFavoriteRes] = useState('');
 
-  function durFormat(duration) {
-    var min = Math.floor(duration / 60000);
-    var sec = Math.floor((duration - (min * 60000)) / 1000);
-    return min + 'min ' + sec + 's';
-  }
-
-  function embedTrackFormat(trackUrl) {
-    return trackUrl.replace('track/', 'embed/track/')
-  }
 
   function like() {
     var popup = document.getElementById('popup-liked');

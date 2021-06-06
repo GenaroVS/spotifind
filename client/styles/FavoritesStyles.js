@@ -2,17 +2,21 @@ import styled from 'styled-components';
 
 export const FavCont = styled.section`
   box-sizing: border-box;
-  width: 70%;
+  width: 60%;
   margin: 0 auto;
   padding: 0 100px;
 
-  h1 {
+  & > h1 {
     text-align: center;
     font-size: 3rem;
   }
 
-  h3 {
+  & > h3 {
     text-align: center;
+  }
+
+  & > div {
+    margin-bottom: 20px;
   }
 `;
 
