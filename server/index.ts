@@ -1,6 +1,11 @@
 import app = require('./app');
+import { createServer } from 'http';
+import connectSocket = require('./sockets');
+const server = createServer(app);
+
+connectSocket(server);
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+server.listen(port, () => {
   console.log('server is working at ' + port);
 });

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Image = styled.img`
-  width: 100px;
-  height: 100px;
+  width: auto;
+  height: 100%;
   box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.3);
 `;
 
@@ -27,7 +27,7 @@ export const Rank = styled.div`
   justify-content: center;
   align-items: center;
   height: 100px;
-  padding: 10px 0 10px 10px;
+  padding: 5px 10px;
   border-radius: 5px;
   background-color: var(--light-gray);
   width: 100%;

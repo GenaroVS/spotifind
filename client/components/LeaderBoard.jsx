@@ -17,8 +17,10 @@ const LeaderBoard = ({ board }) => {
 
   return (
     <Page>
+      <h1>Monthly Leaderboard</h1>
       <ArtistsNav
         setSearch={setSearch}
+        currentCategory={category}
         setCategory={setCategory}
         isDecr={isDecr}
         setIsDecr={setIsDecr} />

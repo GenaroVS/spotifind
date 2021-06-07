@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const sortCB = (a, b, prop, isDecr) => {
-  if (typeof prop === 'string' && isDecr) {
+  if (typeof a[prop] === 'string' && isDecr) {
     return a[prop] < b[prop] ? -1 : 1;
-  } else if (!isDecr) {
+  } else if (typeof a[prop] === 'string' && !isDecr) {
     return a[prop] > b[prop] ? -1 : 1;
   }
 
-  if (typeof prop === 'number' && isDecr) {
+  if (typeof a[prop] === 'number' && isDecr) {
     return b[prop] - a[prop];
-  } else if (!isDecr) {
+  } else if (typeof a[prop] === 'number' && !isDecr) {
     return a[prop] - b[prop];
   }
 };

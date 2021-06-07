@@ -4,7 +4,6 @@ const session = require('express-session');
 const compression = require('compression');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
 const allowCrossOrigin = require('./middleware/allowCrossOrigin');
-const app = express();
 const rootPath = path.join(__dirname, '../');
 const cacheOptions = {
   etag: true, // Just being explicit about the default.
@@ -18,6 +17,8 @@ const cacheOptions = {
     }
   }
 }
+
+const app = express();
 
 app.use(allowCrossOrigin);
 app.use(express.json());

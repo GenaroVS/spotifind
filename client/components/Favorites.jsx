@@ -55,6 +55,7 @@ const Favorites = () => {
       <h1>{formatTitle(user.given_name)}</h1>
       <ArtistsNav
         setSearch={setSearch}
+        currentCategory={category}
         setCategory={setCategory}
         isDecr={isDecr}
         setIsDecr={setIsDecr} />

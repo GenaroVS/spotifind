@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import Chat from './Chat.jsx';
 import { Page, InfoCont, Link , Info } from '../styles/ArtistStyles.js';
 import Popup from './Popup.jsx';
 import { AuthContext } from '../utils/context.js';
@@ -97,6 +98,7 @@ export default ({ artist, liked, setLiked }) => {
           allow='encrypted-media'>
         </iframe>
       </InfoCont>
+      <Chat />
     </Page>
   )
 };

@@ -8,7 +8,7 @@ export default ({ previous, page }) => {
   return (
     <>
       {previous.map(artist => {
-        return <Artist key={uuuidv4()} artist={artist} page={page}/>
+        return <Artist key={uuidv4()} artist={artist} page={page}/>
       })}
     </>
   )

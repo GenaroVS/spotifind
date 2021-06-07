@@ -4,7 +4,6 @@ export const FavCont = styled.section`
   box-sizing: border-box;
   width: 60%;
   margin: 0 auto;
-  padding: 0 100px;
 
   & > h1 {
     text-align: center;
@@ -29,14 +28,18 @@ export const List = styled.section`
 `;
 
 export const Favorite = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
 
   i.fa-times {
-    margin-left: 20px;
+    position: absolute;
+    right: -5%;
+    top: 50%;
     font-size: 30px;
+    transform: translateY(-50%);
     color: red;
     cursor: pointer;
     transition: transform 100ms linear;
