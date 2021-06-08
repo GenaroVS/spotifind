@@ -21,7 +21,11 @@ const filter = (initial, query) => {
 
   if (search) {
     artists = artists.filter(({ name, track }) => {
-      return name.indexOf(search) >= 0 || track.indexOf(search) >= 0;
+      let lowerName = name.toLowerCase();
+      let lowerTrack = track.toLowerCase();
+      let lowerSearch = search.toLowerCase();
+      return lowerName.indexOf(lowerSearch) >= 0 ||
+             lowerTrack.indexOf(lowerSearch) >= 0;
     });
   }
 
