@@ -3,7 +3,6 @@ import { Server as httpServer } from 'http';
 
 /* Here are some ideas to improve the application:
 Add private messaging.
-Add is typing
 */
 
 interface OktaMiddleWareUser {
@@ -26,6 +25,7 @@ interface connectError {
 
 const connectSockets = (server: httpServer, serverOptions: Partial<ServerOptions> = {}) => {
   const io = new Server(server, serverOptions);
+  let guestCount = 0;
 
   io.on('connection', (socket: Socket) => {
 
@@ -36,8 +36,9 @@ const connectSockets = (server: httpServer, serverOptions: Partial<ServerOptions
     socket.on('add user', (user: OktaMiddleWareUser | boolean) => {
       let msg = '';
       if (typeof user === 'boolean') {
-        socket.data.user = 'Guest';
-        msg = 'Guest has connected';
+        socket.data.user = `Guest ${guestCount}`;
+        guestCount += 1;
+        msg = `${socket.data.user} has connected`;
       } else {
         socket.data.user = user.name;
         msg = `${user.name} has connected`
