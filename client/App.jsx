@@ -6,11 +6,14 @@ import {
   Link
 } from "react-router-dom";
 import axios from 'axios';
+import SideBar from './components/SideBar.jsx';
+import { Logo, Container, NavBar, NavBtn, MainBtn } from './styles/AppStyles.js';
+import { AuthContext } from './utils/context.js';
 
-const Artist = lazy(() => import(
+const Today = lazy(() => import(
   /* webpackChunkName: "Artist" */
   /* webpackPrefetch: true */
-  './components/Artist.jsx'
+  './components/Today.jsx'
 ));
 const Leaderboard = lazy(() => import(
   /* webpackChunkName: "Leaderboard" */
@@ -31,9 +34,6 @@ const Favorites = lazy(() => import(
   './components/Favorites.jsx'
 ));
 
-import SideBar from './components/SideBar.jsx';
-import { Logo, Container, NavBar, NavBtn, MainBtn } from './styles/AppStyles.js';
-import { AuthContext } from './utils/context.js';
 
 export default () => {
   const [artist, setArtist] = useState({});
@@ -92,7 +92,7 @@ export default () => {
                 <Previous previous={previous}/>
               </Route>
               <Route path='/today'>
-                <Artist
+                <Today
                   artist={artist}
                   setLiked={setLiked}
                   liked={liked}/>
