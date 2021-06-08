@@ -20,13 +20,20 @@ export const Messages = styled.ul`
   padding: 0;
   height: 100%;
   overflow-y: scroll;
+  box-shadow: inset 23px 23px 46px #ededed,
+              inset -23px -23px 46px #ffffff;
 
   & > li {
     padding: 0.5rem 1rem;
+    overflow-wrap: break-word;
   }
 
-  & > li:nth-child(odd) {
-    background-color: var(--main-color);
+  span {
+    color: var(--main-color);
+  }
+
+  #typing {
+    text-align: center;
   }
 `;
 

@@ -3,7 +3,7 @@ import { createServer } from 'http';
 import connectSocket = require('./sockets');
 const server = createServer(app);
 
-connectSocket(server);
+connectSocket(server, { serveClient: false });
 
 const port = process.env.PORT || 3000;
 server.listen(port, () => {
